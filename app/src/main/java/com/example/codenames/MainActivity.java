@@ -26,13 +26,22 @@ public class MainActivity extends AppCompatActivity {
 //        dialogbtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
+
 //                dialog.setContentView(R.layout.dialog_guessword);
+
+//                dialog.setContentView(R.layout.dialog_message);
+
 //                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //                dialog.getWindow().setBackgroundDrawable(null);
 //                dialog.setCancelable(false);
 //                dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+
 ////                TextView lblMessage = dialog.findViewById(R.id.lblMessage);
 ////                lblMessage.setText("Wrong word");
+
+//                TextView lblMessage = dialog.findViewById(R.id.lblMessage);
+//                lblMessage.setText("Wrong word");
+
 //                dialog.show();
 //                new CountDownTimer(2000,1000){
 //                    @Override
