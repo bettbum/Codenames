@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.GamePlay"
+    android:background="@color/black">
+    <TextView
+        android:id="@+id/lblRoomNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room number : 3289"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/lblTurn"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="BLUE'S TURN"
+        android:textSize="20dp"
+        android:background="@drawable/button_default"
+        android:gravity="center"
+        android:textAllCaps="true"
+        app:layout_constraintTop_toBottomOf="@id/lblRoomNumber"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/white"
+        />
+
+    <TableLayout
+        android:id="@+id/tbBoardGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lblTurn"
+        android:layout_marginTop="30dp">
+
+        <TableRow
+            android:padding="0dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn00"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn01"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn02"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn03"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn04"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+        </TableRow>
+        <TableRow
+            android:padding="0dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn10"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn11"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn12"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn13"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn14"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+        </TableRow>
+        <TableRow
+            android:padding="0dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn20"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn21"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn22"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn23"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn24"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+        </TableRow>
+        <TableRow
+            android:padding="0dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn30"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn31"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn32"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn33"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn34"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+        </TableRow>
+        <TableRow
+            android:padding="0dp"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn40"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn41"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn42"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn43"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+            <Button
+                android:id="@+id/btn44"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:text="Cat" />
+        </TableRow>
+        <TableRow
+            android:padding="0dp"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/lblGuessWord"
+                android:background="@drawable/button_default"
+                android:layout_height="50dp"
+                android:layout_span="3"
+                android:text="Guessword"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/lblClueNumber"
+                android:background="@drawable/button_default"
+                android:layout_height="50dp"
+                android:layout_span="2"
+                android:text="3"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/btnObjBlue"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="Objective"
+        android:background="@drawable/button_default"
+        app:layout_constraintTop_toBottomOf="@id/tbBoardGame"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"/>
+    <Button
+        android:id="@+id/btnSpyBlue"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="spymaster"
+        android:background="@drawable/button_default"
+        app:layout_constraintTop_toBottomOf="@id/btnObjBlue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"/>
+    <Button
+        android:id="@+id/btnObjRed"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="Objective"
+        android:background="@drawable/button_default"
+        app:layout_constraintTop_toBottomOf="@id/tbBoardGame"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"/>
+    <Button
+        android:id="@+id/btnSpyRed"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="SPYMASTER"
+        android:background="@drawable/button_default"
+        app:layout_constraintTop_toBottomOf="@id/btnObjRed"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="30dp"/>
+
+    <TextView
+        android:id="@+id/lblDivider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/btnSpyRed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/lblBluePoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/lblDivider"
+        app:layout_constraintRight_toLeftOf="@id/lblDivider"
+        android:layout_marginRight="30dp"
+        android:textColor="@color/blue_button"/>
+    <TextView
+        android:id="@+id/lblRedPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/lblDivider"
+        app:layout_constraintLeft_toRightOf="@id/lblDivider"
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/red_button"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
