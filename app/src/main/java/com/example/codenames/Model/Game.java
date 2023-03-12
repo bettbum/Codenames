@@ -5,7 +5,7 @@ public class Game {
     private Boolean isStarted;
     private Team teamRed;
     private Team teamBlue;
-    private Team winner;
+    private TeamType winner;
 
     public String getMapID() {
         return mapID;
@@ -39,15 +39,15 @@ public class Game {
         this.teamBlue = teamBlue;
     }
 
-    public Team getWinner() {
+    public TeamType getWinner() {
         return winner;
     }
 
-    public void setWinner(Team winner) {
+    public void setWinner(TeamType winner) {
         this.winner = winner;
     }
 
-    public Game(String mapID, Boolean isStarted, Team teamRed, Team teamBlue, Team winner) {
+    public Game(String mapID, Boolean isStarted, Team teamRed, Team teamBlue, TeamType winner) {
         this.mapID = mapID;
         this.isStarted = isStarted;
         this.teamRed = teamRed;

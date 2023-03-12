@@ -1,16 +1,18 @@
 package com.example.codenames.Model;
 
+import android.graphics.Color;
+
 public class Team {
-    private String teamID;
+    private TeamType teamID;
     private String operative;
     private String spymaster;
-    private String color;
+    private Color color;
 
-    public String getTeamID() {
+    public TeamType getTeamID() {
         return teamID;
     }
 
-    public void setTeamID(String teamID) {
+    public void setTeamID(TeamType teamID) {
         this.teamID = teamID;
     }
 
@@ -30,15 +32,15 @@ public class Team {
         this.spymaster = spymaster;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
-    public Team(String teamID, String operative, String spymaster, String color) {
+    public Team(TeamType teamID, String operative, String spymaster, Color color) {
         this.teamID = teamID;
         this.operative = operative;
         this.spymaster = spymaster;

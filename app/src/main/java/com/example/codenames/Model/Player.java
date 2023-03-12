@@ -1,24 +1,24 @@
 package com.example.codenames.Model;
 
 public class Player {
-    private String playerID;
-    private String teamID;
+    private PlayerType playerID;
+    private TeamType teamID;
     private String name;
-    private String role;
+    private Roles role;
 
-    public String getPlayerID() {
+    public PlayerType getPlayerID() {
         return playerID;
     }
 
-    public void setPlayerID(String playerID) {
+    public void setPlayerID(PlayerType playerID) {
         this.playerID = playerID;
     }
 
-    public String getTeamID() {
+    public TeamType getTeamID() {
         return teamID;
     }
 
-    public void setTeamID(String teamID) {
+    public void setTeamID(TeamType teamID) {
         this.teamID = teamID;
     }
 
@@ -30,15 +30,15 @@ public class Player {
         this.name = name;
     }
 
-    public String getRole() {
+    public Roles getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Roles role) {
         this.role = role;
     }
 
-    public Player(String playerID, String teamID, String name, String role) {
+    public Player(PlayerType playerID, TeamType teamID, String name, Roles role) {
         this.playerID = playerID;
         this.teamID = teamID;
         this.name = name;
