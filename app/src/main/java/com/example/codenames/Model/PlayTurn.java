@@ -6,7 +6,7 @@ public class PlayTurn {
     private MapPlayer map;
     private int numOfGuess;
     private String clue;
-    private String[] wordsGuess;
+    private Word[] wordsGuess;
 //    private int turnTiming;
 
     public Player getOperative() {
@@ -49,15 +49,15 @@ public class PlayTurn {
         this.clue = clue;
     }
 
-    public String[] getWordsGuess() {
+    public Word[] getWordsGuess() {
         return wordsGuess;
     }
 
-    public void setWordsGuess(String[] wordsGuess) {
+    public void setWordsGuess(Word[] wordsGuess) {
         this.wordsGuess = wordsGuess;
     }
 
-    public PlayTurn(Player operative, Player spymaster, MapPlayer map, int numOfGuess, String clue, String[] wordsGuess) {
+    public PlayTurn(Player operative, Player spymaster, MapPlayer map, int numOfGuess, String clue, Word[] wordsGuess) {
         this.operative = operative;
         this.spymaster = spymaster;
         this.map = map;
