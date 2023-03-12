@@ -1,5 +1,7 @@
 package com.example.codenames.Model;
 
+import com.example.codenames.Model.Enum.TeamType;
+
 public class Game {
     private String mapID;
     private Boolean isStarted;

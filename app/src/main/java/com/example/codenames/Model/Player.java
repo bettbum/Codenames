@@ -1,5 +1,9 @@
 package com.example.codenames.Model;
 
+import com.example.codenames.Model.Enum.PlayerType;
+import com.example.codenames.Model.Enum.Roles;
+import com.example.codenames.Model.Enum.TeamType;
+
 public class Player {
     private PlayerType playerID;
     private TeamType teamID;

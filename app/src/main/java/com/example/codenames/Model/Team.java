@@ -2,6 +2,8 @@ package com.example.codenames.Model;
 
 import android.graphics.Color;
 
+import com.example.codenames.Model.Enum.TeamType;
+
 public class Team {
     private TeamType teamID;
     private String operative;
