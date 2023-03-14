@@ -1,17 +1,14 @@
 package com.example.codenames.Model;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
-import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.codenames.Model.Enum.Roles;
 import com.example.codenames.R;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -53,9 +50,6 @@ public class MapPlayer {
         this.role = role;
     }
 
-    public MapPlayer() {
-    }
-
     public MapPlayer(String mapID, Word[] words, Color[] colors, Roles role) {
         this.mapID = mapID;
         this.words = words;
@@ -64,14 +58,21 @@ public class MapPlayer {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+    public MapPlayer(int mapID, Word[] words) {
+        this.mapID = mapID;
+        this.words = words;
+        this.colors = generateColor();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     //Suffering a random array of color map
-    public ArrayList<Color> generateColor(Context ctx) {
-        Resources res = ctx.getResources();
+    public Color[] generateColor() {
+        Resources res = null;
         int red = res.getColor(R.color.red_button);
         int blue = res.getColor(R.color.blue_button);
         int gray = res.getColor(R.color.gray_400);
         int darkGray = res.getColor(R.color.gray_600);
-        ArrayList<Color> original = new ArrayList<Color>() ;
+        List<Color> original = null;
         Color[] result = new Color[25];
         //map has 1 gray Card
         original.add(Color.valueOf(gray));
@@ -85,7 +86,8 @@ public class MapPlayer {
             original.add(Color.valueOf(blue));
         }
         Collections.shuffle(original);
-        return original;
+        original.toArray(result);
+        return result;
     }
 }
 

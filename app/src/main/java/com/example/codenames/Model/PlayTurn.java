@@ -1,11 +1,22 @@
 package com.example.codenames.Model;
 
 public class PlayTurn {
+    private int turnID;
+
     private Player operative;
     private Player spymaster;
     private MapPlayer map;
     private int numOfGuess;
     private String clue;
+
+    public int getTurnID() {
+        return turnID;
+    }
+
+    public void setTurnID(int turnID) {
+        this.turnID = turnID;
+    }
+
     private Word[] wordsGuess;
 //    private int turnTiming;
 
@@ -57,9 +68,8 @@ public class PlayTurn {
         this.wordsGuess = wordsGuess;
     }
 
-    public PlayTurn(Player operative, Player spymaster, MapPlayer map, int numOfGuess, String clue, Word[] wordsGuess) {
+    public PlayTurn(Player operative, MapPlayer map, int numOfGuess, String clue, Word[] wordsGuess) {
         this.operative = operative;
-        this.spymaster = spymaster;
         this.map = map;
         this.numOfGuess = numOfGuess;
         this.clue = clue;
