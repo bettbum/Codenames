@@ -12,15 +12,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class MapPlayer {
-    private String mapID;
+    private int mapID;
     private Word[] words;
     private Color[] colors;
 
-    public String getMapID() {
+    public int getMapID() {
         return mapID;
     }
 
-    public void setMapID(String mapID) {
+    public void setMapID(int mapID) {
         this.mapID = mapID;
     }
 
@@ -38,7 +38,7 @@ public class MapPlayer {
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public MapPlayer(String mapID, Word[] words) {
+    public MapPlayer(int mapID, Word[] words) {
         this.mapID = mapID;
         this.words = words;
         this.colors = generateColor();
