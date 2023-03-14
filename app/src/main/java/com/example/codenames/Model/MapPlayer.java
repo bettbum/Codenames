@@ -6,7 +6,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.codenames.Model.Enum.Roles;
 import com.example.codenames.R;
 
 import java.util.Collections;
@@ -16,7 +15,6 @@ public class MapPlayer {
     private String mapID;
     private Word[] words;
     private Color[] colors;
-    private Roles role;
 
     public String getMapID() {
         return mapID;
@@ -38,23 +36,12 @@ public class MapPlayer {
         return colors;
     }
 
-    public void setColors(Color[] colors) {
-        this.colors = colors;
-    }
 
-    public Roles getRole() {
-        return role;
-    }
-
-    public void setRole(Roles role) {
-        this.role = role;
-    }
-
-    public MapPlayer(String mapID, Word[] words, Color[] colors, Roles role) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public MapPlayer(String mapID, Word[] words) {
         this.mapID = mapID;
         this.words = words;
-        this.colors = colors;
-        this.role = role;
+        this.colors = generateColor();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

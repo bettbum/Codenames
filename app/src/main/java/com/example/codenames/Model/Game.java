@@ -5,9 +5,18 @@ import com.example.codenames.Model.Enum.TeamType;
 public class Game {
     private String mapID;
     private Boolean isStarted;
+    private Boolean isEnded;
     private Team teamRed;
     private Team teamBlue;
     private TeamType winner;
+
+    public Boolean getEnded() {
+        return isEnded;
+    }
+
+    public void setEnded(Boolean ended) {
+        isEnded = ended;
+    }
 
     public String getMapID() {
         return mapID;
@@ -49,11 +58,10 @@ public class Game {
         this.winner = winner;
     }
 
-    public Game(String mapID, Boolean isStarted, Team teamRed, Team teamBlue, TeamType winner) {
+    public Game(String mapID, Boolean isStarted, Team teamRed, Team teamBlue) {
         this.mapID = mapID;
         this.isStarted = isStarted;
         this.teamRed = teamRed;
         this.teamBlue = teamBlue;
-        this.winner = winner;
     }
 }

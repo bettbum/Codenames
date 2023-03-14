@@ -11,6 +11,7 @@ public class Team {
     private Player spymaster;
     private Color color;
 
+
     public TeamType getTeamID() {
         return teamID;
     }

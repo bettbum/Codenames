@@ -1,20 +1,19 @@
 package com.example.codenames.Model;
 
-import com.example.codenames.Model.Enum.PlayerType;
 import com.example.codenames.Model.Enum.Roles;
 import com.example.codenames.Model.Enum.TeamType;
 
 public class Player {
-    private PlayerType playerID;
+    private int playerID;
     private TeamType teamID;
     private String name;
     private Roles role;
 
-    public PlayerType getPlayerID() {
+    public int getPlayerID() {
         return playerID;
     }
 
-    public void setPlayerID(PlayerType playerID) {
+    public void setPlayerID(int playerID) {
         this.playerID = playerID;
     }
 
@@ -42,10 +41,10 @@ public class Player {
         this.role = role;
     }
 
-    public Player(PlayerType playerID, TeamType teamID, String name, Roles role) {
+    public Player(int playerID, String name) {
         this.playerID = playerID;
-        this.teamID = teamID;
+        this.teamID = null;
         this.name = name;
-        this.role = role;
+        this.role = null;
     }
 }
