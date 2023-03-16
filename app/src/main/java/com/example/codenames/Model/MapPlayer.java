@@ -12,13 +12,11 @@ import com.example.codenames.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class MapPlayer {
     private String mapID;
-    private Word[] words;
-    private Color[] colors;
-    private Roles role;
+    private ArrayList<Word> words;
+    private ArrayList<Color> colors;
 
     public String getMapID() {
         return mapID;
@@ -28,39 +26,30 @@ public class MapPlayer {
         this.mapID = mapID;
     }
 
-    public Word[] getWords() {
+    public ArrayList<Word> getWords() {
         return words;
     }
 
-    public void setWords(Word[] words) {
+    public void setWords(ArrayList<Word> words) {
         this.words = words;
     }
 
-    public Color[] getColors() {
+    public ArrayList<Color> getColors() {
         return colors;
     }
 
-    public void setColors(Color[] colors) {
+    public void setColors(ArrayList<Color> colors) {
         this.colors = colors;
     }
 
-    public Roles getRole() {
-        return role;
-    }
-
-    public void setRole(Roles role) {
-        this.role = role;
-    }
-
-    public MapPlayer(String mapID, Word[] words, Color[] colors, Roles role) {
+    public MapPlayer(String mapID, ArrayList<Word> words, ArrayList<Color> colors, Roles role) {
         this.mapID = mapID;
         this.words = words;
         this.colors = colors;
-        this.role = role;
     }
     public MapPlayer(){}
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public MapPlayer(String mapID, Word[] words) {
+    public MapPlayer(String mapID, ArrayList<Word> words) {
         this.mapID = mapID;
         this.words = words;
         //this.colors = generateColor();
