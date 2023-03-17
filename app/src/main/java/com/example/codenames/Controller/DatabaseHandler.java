@@ -34,11 +34,12 @@ public class DatabaseHandler {
             }
         });
     }
-    public void createNewGame(){
+    public static String createNewGame(){
         Game newGame = new Game();
         gameDatabase.child(newGame.getMapID()).setValue(newGame);
+        return newGame.getMapID();
     }
-    public void joinAnExistingGame(String gameId){
+    public static void joinAnExistingGame(String gameId){
         DatabaseReference gameRef = gameDatabase.child(gameId);
         gameRef.addValueEventListener(new ValueEventListener() {
             @Override

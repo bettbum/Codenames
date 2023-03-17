@@ -37,7 +37,7 @@
         android:id="@+id/lblError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Invalid Room number! Must be 4 numbers"
+        android:text="Invalid Room number!"
         android:textColor="@color/red_error"
         app:layout_constraintTop_toBottomOf="@id/edRoomNumber"
         app:layout_constraintLeft_toLeftOf="parent"
