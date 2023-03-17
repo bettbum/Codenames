@@ -46,28 +46,29 @@
             <Button
                 android:id="@+id/btn00"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp"
+                />
             <Button
                 android:id="@+id/btn01"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp"/>
             <Button
                 android:id="@+id/btn02"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn03"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn04"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
         </TableRow>
         <TableRow
             android:padding="0dp"
@@ -75,28 +76,28 @@
             <Button
                 android:id="@+id/btn10"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp"/>
             <Button
                 android:id="@+id/btn11"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn12"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn13"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn14"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
         </TableRow>
         <TableRow
             android:padding="0dp"
@@ -104,28 +105,28 @@
             <Button
                 android:id="@+id/btn20"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn21"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn22"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp"/>
             <Button
                 android:id="@+id/btn23"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn24"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
         </TableRow>
         <TableRow
             android:padding="0dp"
@@ -133,28 +134,28 @@
             <Button
                 android:id="@+id/btn30"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp"/>
             <Button
                 android:id="@+id/btn31"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn32"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn33"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn34"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp"/>
         </TableRow>
         <TableRow
             android:padding="0dp"
@@ -162,28 +163,28 @@
             <Button
                 android:id="@+id/btn40"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn41"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn42"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp"/>
             <Button
                 android:id="@+id/btn43"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
             <Button
                 android:id="@+id/btn44"
                 android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="Cat" />
+                android:layout_height="50dp"
+                android:textSize="10dp" />
         </TableRow>
         <TableRow
             android:padding="0dp"

@@ -1,5 +1,8 @@
 package com.example.codenames;
 
+import static com.example.codenames.Controller.retrieveWords.retrieveWords;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,7 +12,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.codenames.Model.MapPlayer;
+import com.example.codenames.View.GamePlay;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,10 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //testing color
+//        MapPlayer map = new MapPlayer();
+//        ArrayList<Color> colors = map.generateColor(getBaseContext());
+//        Log.d("testing colors", colors.toString());
 
-        MapPlayer map = new MapPlayer();
-        ArrayList<Color> colors = map.generateColor(getBaseContext());
-        Log.d("testing colors", colors.toString());
+
+        //testing if the words are on board
+        Intent i = new Intent(this, GamePlay.class);
+        startActivity(i);
 
         //Testing dialog button
 //        Button dialogbtn = findViewById(R.id.btnTestDialog);

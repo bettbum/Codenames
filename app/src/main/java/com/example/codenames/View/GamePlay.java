@@ -1,19 +1,26 @@
 package com.example.codenames.View;
 
+import static com.example.codenames.Controller.retrieveWords.retrieveWords;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.codenames.R;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GamePlay extends AppCompatActivity {
     TextView lblRoomNumber, lblTurn, lblBluePoints, lblRedPoints;
     ArrayList<Button> listBtnsCards= new ArrayList<>();
     Button btnObjBlue, btnSpyBlue, btnObjRed, btnSpyRed;
+    ArrayList<String> listOfWords = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +60,21 @@ public class GamePlay extends AppCompatActivity {
         btnSpyBlue = findViewById(R.id.btnSpyBlue);
         btnSpyRed = findViewById(R.id.btnSpyRed);
         btnObjRed = findViewById(R.id.btnObjRed);
-
+        setWordsOnBoards();
+    }
+    private void setWordsOnBoards(){
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                listOfWords = retrieveWords(getBaseContext());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.d("testing words", String.valueOf(listOfWords));
+        if(listOfWords.size() == 25){
+            for(int i = 0; i < listOfWords.size(); i++){
+                listBtnsCards.get(i).setText(listOfWords.get(i));
+            }
+        }
     }
 }
