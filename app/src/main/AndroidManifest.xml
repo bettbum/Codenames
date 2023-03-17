@@ -13,28 +13,28 @@
         android:theme="@style/Theme.Codenames"
         tools:targetApi="31">
         <activity
-            android:name=".GamePlay"
+            android:name=".View.GamePlay"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Room"
+            android:name=".View.Room"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".JoinRoom"
+            android:name=".View.JoinRoom"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainMenu"
+            android:name=".View.MainMenu"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
