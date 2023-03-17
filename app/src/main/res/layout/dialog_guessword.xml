@@ -45,7 +45,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="5dp"
-            android:textColor="@color/red_error"/>
+            android:textColor="@color/red_error"
+            />
         <TextView
             android:id="@+id/lblEnterNumOfGuess"
             android:layout_width="wrap_content"
@@ -81,7 +82,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginTop="5dp"
-            android:textColor="@color/red_error"/>
+            android:textColor="@color/red_error"
+            />
 
         <Button
             android:id="@+id/btnSubmit"
@@ -92,7 +94,8 @@
             app:layout_constraintTop_toBottomOf="@id/lblErrorNumOfGuesses"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:enabled="false"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

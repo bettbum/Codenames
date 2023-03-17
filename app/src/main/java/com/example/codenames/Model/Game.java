@@ -2,6 +2,8 @@ package com.example.codenames.Model;
 
 import com.example.codenames.Model.Enum.TeamType;
 
+import java.util.UUID;
+
 public class Game {
     private String mapID;
     private Boolean isStarted;
@@ -63,5 +65,12 @@ public class Game {
         this.isStarted = isStarted;
         this.teamRed = teamRed;
         this.teamBlue = teamBlue;
+    }
+    public Game(){
+        this.mapID = UUID.randomUUID().toString();
+        this.isStarted = false;
+        this.isEnded = false;
+        this.teamRed = null;
+        this.teamBlue = null;
     }
 }
