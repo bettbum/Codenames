@@ -5,16 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.codenames.Controller.DatabaseHandler;
+import com.example.codenames.Controller.GlobalData;
+import com.example.codenames.Model.Enum.Roles;
+import com.example.codenames.Model.Enum.TeamType;
+import com.example.codenames.Model.Player;
 import com.example.codenames.R;
+
+import java.util.ArrayList;
 
 public class Room extends AppCompatActivity {
     TextView lblRoomNumber, lblNumberOfPlayersJoined;
-    Button btnObjectiveBlue, btnSpymasterBlue, btnObjectiveRed, btnSpymasterRed;
-
+    Button btnObjectiveBlue, btnSpymasterBlue, btnObjectiveRed, btnSpymasterRed, btnBack, btnReady;
+    TeamType team; Roles role;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,24 +32,95 @@ public class Room extends AppCompatActivity {
     }
     private void initialize(){
         lblRoomNumber = findViewById(R.id.lblRoomNumber);
+        if(GlobalData.game.getMapID() != ""){
+            lblRoomNumber.setText("Room number : " + GlobalData.game.getMapID());
+        }
         lblNumberOfPlayersJoined = findViewById(R.id.lblNumberOfPlayersJoined);
+        lblNumberOfPlayersJoined.setText("Number of players joined : " + GlobalData.listOfCurrentPlayers.size());
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(GlobalData.currentPlayer != null && GlobalData.game != null){
+                    DatabaseHandler.removePlayer(GlobalData.game.getMapID(), GlobalData.currentPlayer.getPlayerID());
+                    finish();
+                }
+            }
+        });
         btnObjectiveBlue = findViewById(R.id.btnObjectiveBlue);
         btnObjectiveBlue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnObjectiveBlue.setBackgroundColor(Color.GRAY);
+                setBtnOnCLick(btnObjectiveBlue);
+                team = TeamType.BLUE;
+                role = Roles.operative;
             }
         });
         btnSpymasterBlue = findViewById(R.id.btnSpymasterBlue);
+        btnSpymasterBlue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setBtnOnCLick(btnSpymasterBlue);
+                team = TeamType.BLUE;
+                role = Roles.spymaster;;
+            }
+        });
         btnObjectiveRed = findViewById(R.id.btnObjectiveRed);
+        btnObjectiveRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setBtnOnCLick(btnObjectiveRed);
+                team = TeamType.RED;
+                role = Roles.operative;;
+            }
+        });
         btnSpymasterRed = findViewById(R.id.btnSpymasterRed);
-
+        btnSpymasterRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setBtnOnCLick(btnSpymasterRed);
+                team = TeamType.RED;
+                role = Roles.spymaster;
+            }
+        });
+        btnReady = findViewById(R.id.btnReady);
+        btnReady.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(GlobalData.game != null){
+                    DatabaseHandler.addRoleForPlater(GlobalData.game.getMapID(), GlobalData.currentPlayer.getPlayerID(), team, role);
+                }
+            }
+        });
+        if(GlobalData.listOfCurrentPlayers.size() != 0){
+            Log.d("listOfCurrent", String.valueOf(GlobalData.listOfCurrentPlayers.size()));
+            for(Player player : GlobalData.listOfCurrentPlayers){
+                if(player.getTeamID() != null && player.getRole() != null) {
+                    Log.d("plaer",player.getTeamID().toString());
+                    if (player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.operative) {
+                        btnObjectiveBlue.setEnabled(false);
+                    } else if (player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.spymaster) {
+                        btnSpymasterBlue.setEnabled(false);
+                    } else if (player.getTeamID() == TeamType.RED && player.getRole() == Roles.operative) {
+                        btnObjectiveRed.setEnabled(false);
+                    } else if (player.getTeamID() == TeamType.RED && player.getRole() == Roles.spymaster) {
+                        btnSpymasterRed.setEnabled(false);
+                    }
+                }
+            }
+        }
+        GlobalData.currentPlayer = DatabaseHandler.addNewPlayer(GlobalData.game.getMapID());
     }
     @SuppressLint("ResourceAsColor")
     private void resetBtnColor(){
-        btnObjectiveBlue.setBackgroundColor(R.color.blue_button);
-        btnSpymasterBlue.setBackgroundColor(R.color.blue_button);
-        btnObjectiveRed.setBackgroundColor(R.color.red_button);
-        btnSpymasterRed.setBackgroundColor(R.color.red_button);
+        btnObjectiveBlue.setBackground(getResources().getDrawable(R.drawable.button_blue));
+        btnSpymasterBlue.setBackground(getResources().getDrawable(R.drawable.button_blue));
+        btnObjectiveRed.setBackground(getResources().getDrawable(R.drawable.button_red));
+        btnSpymasterRed.setBackground(getResources().getDrawable(R.drawable.button_red));
+    }
+    private void setBtnOnCLick(Button btn){
+        resetBtnColor();
+        btn.setBackground(getResources().getDrawable(R.drawable.button_gray));
+        btnReady.setEnabled(true);
     }
 }

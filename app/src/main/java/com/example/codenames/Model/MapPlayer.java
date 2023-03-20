@@ -55,28 +55,6 @@ public class MapPlayer {
         //this.colors = generateColor();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    //Suffering a random array of color map
-    public ArrayList<Color> generateColor(Context ctx) {
-        Resources res = ctx.getResources();
-        int red = res.getColor(R.color.red_button);
-        int blue = res.getColor(R.color.blue_button);
-        int gray = res.getColor(R.color.gray_400);
-        int darkGray = res.getColor(R.color.gray_600);
-        ArrayList<Color> original = new ArrayList<Color>();
-        //map has 1 gray Card
-        original.add(Color.valueOf(gray));
 
-        //map has 9 red Card
-        for (int i = 0; i < 10; i++) {
-            original.add(Color.valueOf(red));
-        }
-        //map has 8 red Card
-        for (int i = 0; i < 9; i++) {
-            original.add(Color.valueOf(blue));
-        }
-        Collections.shuffle(original);
-        return original;
-    }
 }
 

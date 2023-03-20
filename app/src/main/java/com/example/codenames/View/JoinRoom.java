@@ -2,14 +2,19 @@ package com.example.codenames.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.codenames.Controller.DatabaseHandler;
+import com.example.codenames.Controller.GlobalData;
+import com.example.codenames.Controller.Validator;
 import com.example.codenames.R;
 
 public class JoinRoom extends AppCompatActivity {
@@ -47,6 +52,17 @@ public class JoinRoom extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
+            }
+        });
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String gameId = edRoomNumber.getText().toString();
+                if(!Validator.isValidRoomNumber(gameId)){
+                    lblError.setVisibility(View.VISIBLE);
+                }else{
+                    DatabaseHandler.joinAnExistingGame(gameId, v.getContext());
+                }
             }
         });
     }

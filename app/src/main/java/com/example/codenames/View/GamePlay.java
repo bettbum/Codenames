@@ -1,6 +1,6 @@
 package com.example.codenames.View;
 
-import static com.example.codenames.Controller.retrieveWords.retrieveWords;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -63,13 +63,13 @@ public class GamePlay extends AppCompatActivity {
         setWordsOnBoards();
     }
     private void setWordsOnBoards(){
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                listOfWords = retrieveWords(getBaseContext());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                //listOfWords = retrieveWords(getBaseContext());
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         Log.d("testing words", String.valueOf(listOfWords));
         if(listOfWords.size() == 25){
             for(int i = 0; i < listOfWords.size(); i++){

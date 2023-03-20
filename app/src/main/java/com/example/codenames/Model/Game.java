@@ -2,6 +2,8 @@ package com.example.codenames.Model;
 
 import com.example.codenames.Model.Enum.TeamType;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 
 public class Game {
@@ -11,6 +13,7 @@ public class Game {
     private Team teamRed;
     private Team teamBlue;
     private TeamType winner;
+    private ArrayList<Word> listOfWord;
 
     public Boolean getEnded() {
         return isEnded;
@@ -60,14 +63,26 @@ public class Game {
         this.winner = winner;
     }
 
+    public ArrayList<Word> getListOfWord() {
+        return listOfWord;
+    }
+
+    public void setListOfWord(ArrayList<Word> listOfWord) {
+        this.listOfWord = listOfWord;
+    }
+
     public Game(String mapID, Boolean isStarted, Team teamRed, Team teamBlue) {
         this.mapID = mapID;
         this.isStarted = isStarted;
         this.teamRed = teamRed;
         this.teamBlue = teamBlue;
     }
+    public Game(String mapID){
+        this.mapID = mapID;
+    }
     public Game(){
-        this.mapID = UUID.randomUUID().toString();
+        int randomId = (int)Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
+        this.mapID = String.valueOf(randomId);
         this.isStarted = false;
         this.isEnded = false;
         this.teamRed = null;
