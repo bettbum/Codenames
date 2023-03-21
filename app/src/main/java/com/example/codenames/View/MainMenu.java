@@ -1,14 +1,13 @@
 package com.example.codenames.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.codenames.Controller.DatabaseHandler;
-import com.example.codenames.Model.Game;
 import com.example.codenames.R;
 
 public class MainMenu extends AppCompatActivity {

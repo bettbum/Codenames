@@ -2,13 +2,13 @@ package com.example.codenames.View;
 
 import static com.example.codenames.Controller.retrieveWords.retrieveWords;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.codenames.R;
 
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class GamePlay extends AppCompatActivity {
     TextView lblRoomNumber, lblTurn, lblBluePoints, lblRedPoints;
     ArrayList<Button> listBtnsCards= new ArrayList<>();
-    Button btnObjBlue, btnSpyBlue, btnObjRed, btnSpyRed;
+    Button btnOprBlue, btnSpyBlue, btnOprRed, btnSpyRed;
     ArrayList<String> listOfWords = new ArrayList<>();
 
     @Override
@@ -56,10 +56,10 @@ public class GamePlay extends AppCompatActivity {
         listBtnsCards.add(findViewById(R.id.btn42));
         listBtnsCards.add(findViewById(R.id.btn43));
         listBtnsCards.add(findViewById(R.id.btn44));
-        btnObjBlue = findViewById(R.id.btnObjBlue);
+        btnOprBlue = findViewById(R.id.btnObjBlue);
         btnSpyBlue = findViewById(R.id.btnSpyBlue);
         btnSpyRed = findViewById(R.id.btnSpyRed);
-        btnObjRed = findViewById(R.id.btnObjRed);
+        btnOprRed = findViewById(R.id.btnObjRed);
         setWordsOnBoards();
     }
     private void setWordsOnBoards(){

@@ -1,25 +1,12 @@
 package com.example.codenames;
 
 import static com.example.codenames.Controller.DatabaseHandler.testDatabaseConnection;
-import static com.example.codenames.Controller.retrieveWords.retrieveWords;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.codenames.Controller.DialogHandler;
-import com.example.codenames.Model.MapPlayer;
-import com.example.codenames.View.GamePlay;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_menu);
 
         //testing color
 //        MapPlayer map = new MapPlayer();
