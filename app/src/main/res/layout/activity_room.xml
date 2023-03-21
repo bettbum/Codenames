@@ -72,26 +72,26 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"/>
-    <TextView
-        android:id="@+id/lblNumberOfObjectiveMissed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Missing 1 objectives"
-        app:layout_constraintTop_toBottomOf="@id/lblNumberOfPlayersJoined"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/red_error"/>
-    <TextView
-        android:id="@+id/lblNumberOfSpymastersMissed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Missing 1 spymasters"
-        app:layout_constraintTop_toBottomOf="@id/lblNumberOfObjectiveMissed"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/red_error"/>
+<!--    <TextView-->
+<!--        android:id="@+id/lblNumberOfObjectiveMissed"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Missing 1 objectives"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/lblNumberOfPlayersJoined"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:textColor="@color/red_error"/>-->
+<!--    <TextView-->
+<!--        android:id="@+id/lblNumberOfSpymastersMissed"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Missing 1 spymasters"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/lblNumberOfObjectiveMissed"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:textColor="@color/red_error"/>-->
     <Button
         android:id="@+id/btnBack"
         android:layout_width="200dp"
@@ -104,7 +104,7 @@
         android:layout_marginBottom="50dp"
         />
     <Button
-        android:id="@+id/btnPlay"
+        android:id="@+id/btnReady"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:background="@drawable/button_green"
@@ -113,6 +113,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="20dp"
+        android:enabled="false"
         />
 
 
