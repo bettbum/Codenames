@@ -13,9 +13,8 @@ public class Rules extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rules);
-
         EditText editTextRules = findViewById(R.id.editTextRules);
-        String ruleContent = String.valueOf(R.string.rules);
-        editTextRules.setText(android.text.Html.fromHtml(ruleContent));
+        String rules = String.valueOf(R.string.rules);
+        editTextRules.setText(android.text.Html.fromHtml(rules));
     }
 }

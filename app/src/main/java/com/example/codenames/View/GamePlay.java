@@ -1,8 +1,6 @@
 package com.example.codenames.View;
 
 
-
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -12,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.codenames.R;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class GamePlay extends AppCompatActivity {
@@ -77,4 +74,5 @@ public class GamePlay extends AppCompatActivity {
             }
         }
     }
+
 }
