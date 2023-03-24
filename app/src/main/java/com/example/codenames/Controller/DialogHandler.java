@@ -82,7 +82,7 @@ public class DialogHandler {
             @Override
             public void onClick(View v) {
                 String guessWord = edGuessWord.getText().toString();
-                int numberOfGuesses = Integer.valueOf(edNumberOfGuesses.getText().toString());
+                int numberOfGuesses = Integer.parseInt(edNumberOfGuesses.getText().toString());
                 DatabaseHandler.setCurrentGuessWord(new GuessWord(guessWord, numberOfGuesses));
                 dialog.dismiss();
             }

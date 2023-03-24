@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -16,6 +17,7 @@ import com.example.codenames.Model.Enum.Roles;
 import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.Model.Game;
 import com.example.codenames.Model.GuessWord;
+import com.example.codenames.Model.MapPlayer;
 import com.example.codenames.Model.Player;
 import com.example.codenames.Model.Word;
 import com.example.codenames.R;
@@ -61,20 +63,19 @@ public class DatabaseHandler {
     }
     public static void joinAnExistingGame(String gameId, Context ctx){
         DatabaseReference gameRef = gameDatabase.child(gameId);
-
+        GlobalData.listOfWords = new ArrayList<Word>();
         gameRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     GlobalData.game = new Game(gameId);
-                    if(snapshot.child("list_of_words").exists()){
-                       ArrayList<Word> listOfWords = new ArrayList<Word>();
-                        gameDatabase.child(gameId).child("list_of_words").addChildEventListener(new ChildEventListener() {
+                    if(snapshot.child("listOfWord").exists()){
+                        gameDatabase.child(gameId).child("listOfWord").addChildEventListener(new ChildEventListener() {
                             @Override
                             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                                 Word word = snapshot.getValue(Word.class);
-                                listOfWords.add(word);
-                                GlobalData.game.setListOfWord(listOfWords);
+                                GlobalData.listOfWords.add(word);
+                                GlobalData.game.setListOfWord(GlobalData.listOfWords);
                             }
                             @Override
                             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -89,18 +90,28 @@ public class DatabaseHandler {
                             public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
+                        DatabaseHandler.getListOfCurrentPlayer(GlobalData.game.getMapID());
+                        new CountDownTimer(5000,1000){
+                            @Override
+                            public void onTick(long l) {
+                            }
+                            @Override
+                            public void onFinish() {
+                                Intent i = new Intent(ctx, Room.class);
+                                ctx.startActivity(i);
+                            }
+                        }.start();
                     }else{
                         //if the room does not exist
                     }
-                    DatabaseHandler.getListOfCurrentPlayer(GlobalData.game.getMapID());
-                    Intent i = new Intent(ctx, Room.class);
-                    ctx.startActivity(i);
+
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
 
     }
     public static void setCurrentGuessWord(GuessWord guessWord){
@@ -120,18 +131,32 @@ public class DatabaseHandler {
         gameDatabase.child(gameId).child("players").child(playerId).setValue(GlobalData.currentPlayer);
     };
     public static void getListOfCurrentPlayer(String gameId){
-
-        gameDatabase.child(gameId).child("players").addListenerForSingleValueEvent(new ValueEventListener() {
+        GlobalData.listOfCurrentPlayers = new ArrayList<Player>();
+        gameDatabase.child(gameId).child("players").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()){
-                    Player player = ds.getValue(Player.class);
-                    GlobalData.listOfCurrentPlayers.add(player);
-                    Log.d("listOfCurren", String.valueOf(GlobalData.listOfCurrentPlayers.size()));
-                }
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Player player = snapshot.getValue(Player.class);
+                GlobalData.listOfCurrentPlayers.add(player);
             }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     };

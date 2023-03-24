@@ -14,47 +14,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class MapPlayer {
-    private String mapID;
-    private ArrayList<Word> words;
-    private ArrayList<Color> colors;
+    private ArrayList<Player> listOfPlayers;
 
-    public String getMapID() {
-        return mapID;
+    public ArrayList<Player> getListOfPlayers() {
+        return listOfPlayers;
     }
 
-    public void setMapID(String mapID) {
-        this.mapID = mapID;
+    public void setListOfPlayers(ArrayList<Player> listOfPlayers) {
+        this.listOfPlayers = listOfPlayers;
     }
-
-    public ArrayList<Word> getWords() {
-        return words;
+    public MapPlayer(){
+        listOfPlayers = new ArrayList<>();
     }
-
-    public void setWords(ArrayList<Word> words) {
-        this.words = words;
-    }
-
-    public ArrayList<Color> getColors() {
-        return colors;
-    }
-
-    public void setColors(ArrayList<Color> colors) {
-        this.colors = colors;
-    }
-
-    public MapPlayer(String mapID, ArrayList<Word> words, ArrayList<Color> colors, Roles role) {
-        this.mapID = mapID;
-        this.words = words;
-        this.colors = colors;
-    }
-    public MapPlayer(){}
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public MapPlayer(String mapID, ArrayList<Word> words) {
-        this.mapID = mapID;
-        this.words = words;
-        //this.colors = generateColor();
-    }
-
-
 }
 

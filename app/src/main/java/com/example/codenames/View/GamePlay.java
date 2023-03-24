@@ -1,6 +1,7 @@
 package com.example.codenames.View;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -8,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.codenames.Controller.GlobalData;
+import com.example.codenames.Model.Enum.Roles;
+import com.example.codenames.Model.Word;
 import com.example.codenames.R;
 
 import java.util.ArrayList;
@@ -26,6 +30,7 @@ public class GamePlay extends AppCompatActivity {
     }
     private void initialize(){
         lblRoomNumber = findViewById(R.id.lblRoomNumber);
+        lblRoomNumber.setText("Room number : " + GlobalData.game.getMapID());
         lblTurn = findViewById(R.id.lblTurn);
         lblBluePoints = findViewById(R.id.lblBluePoints);
         listBtnsCards.add(findViewById(R.id.btn00));
@@ -57,21 +62,40 @@ public class GamePlay extends AppCompatActivity {
         btnSpyBlue = findViewById(R.id.btnSpyBlue);
         btnSpyRed = findViewById(R.id.btnSpyRed);
         btnOprRed = findViewById(R.id.btnObjRed);
-        setWordsOnBoards();
+        showBoard();
     }
-    private void setWordsOnBoards(){
-//        try {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                //listOfWords = retrieveWords(getBaseContext());
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        Log.d("testing words", String.valueOf(listOfWords));
-        if(listOfWords.size() == 25){
-            for(int i = 0; i < listOfWords.size(); i++){
-                listBtnsCards.get(i).setText(listOfWords.get(i));
+    private void setWordsOnBoardsForSpy(){
+        if(GlobalData.game.getListOfWord().size() == 25){
+            for(int i = 0; i < GlobalData.game.getListOfWord().size(); i++){
+                Word word = GlobalData.game.getListOfWord().get(i);
+                listBtnsCards.get(i).setText(word.getContent());
+                listBtnsCards.get(i).setEnabled(false);
+                listBtnsCards.get(i).setBackgroundColor(word.getColor());
+                listBtnsCards.get(i).setTextColor(Color.BLACK);
+                listBtnsCards.get(i).setEnabled(false);
             }
+        }
+    }
+    private void setWordsOnBoardsForOpe(){
+        if(GlobalData.game.getListOfWord().size() == 25){
+            for(int i = 0; i < GlobalData.game.getListOfWord().size(); i++){
+                Word word = GlobalData.game.getListOfWord().get(i);
+                listBtnsCards.get(i).setText(word.getContent());
+                listBtnsCards.get(i).setEnabled(false);
+                listBtnsCards.get(i).setBackgroundColor(Color.GRAY);
+                listBtnsCards.get(i).setTextColor(Color.WHITE);
+            }
+        }
+    }
+    private void showBoard(){
+        switch (GlobalData.currentPlayer.getRole()){
+            case operative:
+                setWordsOnBoardsForOpe();
+                break;
+            case spymaster:
+                setWordsOnBoardsForSpy();
+                break;
+            default:
         }
     }
 

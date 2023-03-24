@@ -218,7 +218,8 @@
 
         <TableRow
             android:gravity="center"
-            android:padding="0dp">
+            android:padding="6dp"
+            android:layout_height="120dp">
 
             <TextView
                 android:id="@+id/lblGuessWord"

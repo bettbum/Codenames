@@ -17,7 +17,6 @@ public class Validator {
 
     public static int isCorrectWord(int index, Team team){
         ArrayList<Word> listOfWOrds = GlobalData.game.getListOfWord();
-
         if (listOfWOrds.get(index).getColor() == Color.BLACK) {
             return 0;
         }else if (listOfWOrds.get(index).getColor() == Color.YELLOW) {
