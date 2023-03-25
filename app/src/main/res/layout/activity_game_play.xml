@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Room number : 3289"
-        android:textSize="30dp"
+        android:text="@string/room_number_gamePlay"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -25,10 +25,11 @@
         android:layout_height="50dp"
         android:background="@drawable/button_default"
         android:gravity="center"
-        android:text="BLUE'S TURN"
+        android:text="@string/player_turn"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lblRoomNumber" />
@@ -48,25 +49,25 @@
                 android:id="@+id/btn00"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:textSize="10dp" />
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/btn01"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:textSize="10dp" />
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/btn02"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:textSize="10dp" />
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/btn03"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:textSize="10dp" />
+                android:textSize="10sp" />
 
             <Button
                 android:id="@+id/btn04"
@@ -227,7 +228,9 @@
                 android:gravity="center"
                 android:text="Guessword"
                 android:textAllCaps="true"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/lblClueNumber"
@@ -237,7 +240,9 @@
                 android:gravity="center"
                 android:text="3"
                 android:textAllCaps="true"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </TableRow>
     </TableLayout>
 
@@ -249,6 +254,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/button_default"
         android:text="Objective"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tbBoardGame" />
 
@@ -260,6 +266,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/button_default"
         android:text="spymaster"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnObjBlue" />
 
@@ -271,6 +278,7 @@
         android:layout_marginRight="30dp"
         android:background="@drawable/button_default"
         android:text="Objective"
+        android:textSize="16sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tbBoardGame" />
 
@@ -282,6 +290,7 @@
         android:layout_marginRight="30dp"
         android:background="@drawable/button_default"
         android:text="SPYMASTER"
+        android:textSize="16sp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnObjRed" />
 

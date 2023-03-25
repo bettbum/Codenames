@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/button_default"
-    android:gravity="center"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="360dp"
-    app:layout_constraintCircleRadius="20dp">
+    android:background="@drawable/button_default"
+    android:gravity="center"
+    app:layout_constraintCircleRadius="20dp"
+    tools:ignore="TextSizeCheck">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,87 +17,97 @@
             android:id="@+id/lblEnterGuessWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="enter your guess word"
+            android:layout_marginTop="30dp"
+            android:text="@string/enter_your_guess_word"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="30dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/edGuessWord"
             android:layout_width="200dp"
             android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:background="@drawable/button_default"
             android:ems="10"
             android:inputType="textPersonName"
-            android:background="@drawable/button_default"
-            app:layout_constraintTop_toBottomOf="@id/lblEnterGuessWord"
+            android:textAlignment="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="10dp"/>
+            app:layout_constraintTop_toBottomOf="@id/lblEnterGuessWord"
+            tools:ignore="LabelFor" />
+
         <TextView
             android:id="@+id/lblErrorGuessWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Invalid Guess Word"
-            app:layout_constraintTop_toBottomOf="@id/edGuessWord"
+            android:layout_marginTop="5dp"
+            android:text="@string/invalid_guess_word"
+            android:textColor="@color/red_error"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/red_error"
-            />
+            app:layout_constraintTop_toBottomOf="@id/edGuessWord" />
+
         <TextView
             android:id="@+id/lblEnterNumOfGuess"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="enter the number of guesses"
+            android:layout_marginTop="10dp"
+            android:text="@string/enter_the_number_of_guesses"
+            android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lblErrorGuessWord"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"/>
+            app:layout_constraintTop_toBottomOf="@id/lblErrorGuessWord" />
 
         <EditText
             android:id="@+id/edNumOfGuesses"
             android:layout_width="200dp"
             android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:autofillHints=""
+            android:background="@drawable/button_default"
             android:ems="10"
             android:inputType="number"
-            android:background="@drawable/button_default"
-            app:layout_constraintTop_toBottomOf="@id/lblEnterNumOfGuess"
+            android:textAlignment="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="10dp"/>
+            app:layout_constraintTop_toBottomOf="@id/lblEnterNumOfGuess"
+            tools:ignore="LabelFor" />
+
         <TextView
             android:id="@+id/lblErrorNumOfGuesses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Invalid Number Of Guess"
-            app:layout_constraintTop_toBottomOf="@id/edNumOfGuesses"
+            android:layout_marginTop="5dp"
+            android:text="@string/invalid_number_of_guess"
+            android:textColor="@color/red_error"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/red_error"
-            />
+            app:layout_constraintTop_toBottomOf="@id/edNumOfGuesses" />
 
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="submit"
+            android:layout_marginTop="15dp"
             android:background="@drawable/button_default"
-            app:layout_constraintTop_toBottomOf="@id/lblErrorNumOfGuesses"
+            android:enabled="false"
+            android:text="@string/btn_submit"
+            android:textColor="#8BC34A"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="15dp"
-            android:enabled="false"/>
+            app:layout_constraintTop_toBottomOf="@id/lblErrorNumOfGuesses" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

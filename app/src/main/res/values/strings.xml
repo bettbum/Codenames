@@ -3,4 +3,19 @@
     <string name="rule">Rule</string>
     <string name="join_room">Join Room</string>
     <string name="create_room">Create Room</string>
+    <string name="room_number">Room number : 3289</string>
+    <string name="operative_blue_team">Operative</string>
+    <string name="spymaster_blue_team">spymaster</string>
+    <string name="operative_red_team">Operative</string>
+    <string name="spypaster_red_team">spypaster</string>
+    <string name="number_of_players_joined">Number of players joined : 3</string>
+    <string name="btn_back">BACK</string>
+    <string name="btn_ready">ready</string>
+    <string name="room_number_gamePlay">Room number : 3289</string>
+    <string name="player_turn">BLUE\'S TURN</string>
+    <string name="enter_your_guess_word">enter your guess word</string>
+    <string name="invalid_guess_word">Invalid Guess Word</string>
+    <string name="enter_the_number_of_guesses">enter the number of guesses</string>
+    <string name="invalid_number_of_guess">Invalid Number Of Guess</string>
+    <string name="btn_submit">submit</string>
 </resources>

@@ -31,18 +31,16 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("testing colors", colors.toString());
 
 
-        //testing if the words are on board
-//        Intent i = new Intent(getBaseContext(), GamePlay.class);
-//        startActivity(i);
-//        testDatabaseConnection();
-//        //Testing guessword dialog
-//        Button dialogbtn = findViewById(R.id.btnTestDialog);
-//        dialogbtn.setOnClickListener(new View.OnClickListener() {
-           // @Override
-//            public void onClick(View view) {
-//                DialogHandler.displayDialogGuessWord(view);
-//            }
-//        });
+        //Testing button Rules:
+        Button btnCreateRoom = findViewById(R.id.btnCreateRoom);
+        btnCreateRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(),Room.class );
+                startActivity(i);
+
+            }
+        });
 
         //Testing button Rules:
         Button btnRules = findViewById(R.id.btnRule);
@@ -55,5 +53,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Testing button Rules:
+        Button btnJoinRoom = findViewById(R.id.btnJoinRoom);
+        btnJoinRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(),JoinRoom.class );
+                startActivity(i);
+
+            }
+        });
     }
 }
