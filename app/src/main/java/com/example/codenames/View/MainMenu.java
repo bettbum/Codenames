@@ -2,12 +2,14 @@ package com.example.codenames.View;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.codenames.Controller.DatabaseHandler;
+import com.example.codenames.Controller.GlobalData;
 import com.example.codenames.R;
 
 import java.io.IOException;
@@ -49,9 +51,19 @@ public class MainMenu extends AppCompatActivity {
     }
     private void createRoom() throws IOException {
         String gameId = DatabaseHandler.createNewGame(getBaseContext());
-        Intent i = new Intent(this, Room.class);
-        i.putExtra("gameId",gameId);
-        startActivity(i);
+        DatabaseHandler.getListOfCurrentPlayer(GlobalData.game.getMapID());
+        new CountDownTimer(1000,1000){
+            @Override
+            public void onTick(long l) {
+            }
+            @Override
+            public void onFinish() {
+                Intent i = new Intent(getBaseContext(), Room.class);
+                i.putExtra("gameId",gameId);
+                startActivity(i);
+            }
+        }.start();
+
     }
     private void joinRoom(){
         Intent i = new Intent(this, JoinRoom.class);
