@@ -18,4 +18,6 @@
     <string name="enter_the_number_of_guesses">enter the number of guesses</string>
     <string name="invalid_number_of_guess">Invalid Number Of Guess</string>
     <string name="btn_submit">submit</string>
+    <string name="codenames_rules">Codenames Rules</string>
+    <string name="textview_Rules">TextView</string>
 </resources>

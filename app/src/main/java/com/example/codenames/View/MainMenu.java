@@ -58,6 +58,7 @@ public class MainMenu extends AppCompatActivity {
         startActivity(i);
     }
     private void showRules(){
-
+        Intent i = new Intent(this, Rules.class);
+        startActivity(i);
     }
 }
