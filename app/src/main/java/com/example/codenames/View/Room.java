@@ -31,11 +31,11 @@ public class Room extends AppCompatActivity {
 
     private void initialize(){
         lblRoomNumber = findViewById(R.id.lblRoomNumber);
-        if(GlobalData.game.getMapID() != ""){
+        if(GlobalData.game.getMapID() != null){
             lblRoomNumber.setText("Room number : " + GlobalData.game.getMapID());
         }
         lblNumberOfPlayersJoined = findViewById(R.id.lblNumberOfPlayersJoined);
-        lblNumberOfPlayersJoined.setText("Number of players joined : " + GlobalData.listOfCurrentPlayers.size());
+        lblNumberOfPlayersJoined.setText("Number of players joined : " + (GlobalData.listOfCurrentPlayers.size()+1));
         btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +89,6 @@ public class Room extends AppCompatActivity {
                 if(GlobalData.game != null){
                     DatabaseHandler.addRoleForPlater(GlobalData.game.getMapID(), GlobalData.currentPlayer.getPlayerID(), team, role);
                 }
-
-                Log.d("plaer", String.valueOf(GlobalData.listOfCurrentPlayers.size()));
                 if(GlobalData.listOfCurrentPlayers.size() == 4){
                     Intent intent = new Intent(Room.this, GamePlay.class);
                     startActivity(intent);
@@ -100,7 +98,6 @@ public class Room extends AppCompatActivity {
         if(GlobalData.listOfCurrentPlayers.size() != 0){
             for(Player player : GlobalData.listOfCurrentPlayers){
                 if(player.getTeamID() != null && player.getRole() != null) {
-                    Log.d("plaer",player.getTeamID().toString());
                     if (player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.operative) {
                         btnObjectiveBlue.setEnabled(false);
                     } else if (player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.spymaster) {

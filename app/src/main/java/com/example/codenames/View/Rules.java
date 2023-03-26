@@ -3,6 +3,7 @@ package com.example.codenames.View;
 
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -60,5 +61,8 @@ public class Rules extends AppCompatActivity {
         TextView textViewRules = findViewById(R.id.textViewRules);
         textViewRules.setText(android.text.Html.fromHtml(rulesContent));
         textViewRules.setMovementMethod(new ScrollingMovementMethod());
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
+        
     }
 }

@@ -3,21 +3,26 @@ package com.example.codenames.View;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.codenames.Controller.DatabaseHandler;
+import com.example.codenames.Controller.DialogHandler;
 import com.example.codenames.Controller.GlobalData;
 import com.example.codenames.Model.Enum.Roles;
+import com.example.codenames.Model.Enum.TeamType;
+import com.example.codenames.Model.Player;
 import com.example.codenames.Model.Word;
 import com.example.codenames.R;
 
 import java.util.ArrayList;
 
 public class GamePlay extends AppCompatActivity {
-    TextView lblRoomNumber, lblTurn, lblBluePoints, lblRedPoints;
+    TextView lblRoomNumber, lblBluePoints, lblRedPoints, lblGuessWord, lblClueNumber;
     ArrayList<Button> listBtnsCards= new ArrayList<>();
     Button btnOprBlue, btnSpyBlue, btnOprRed, btnSpyRed;
     ArrayList<String> listOfWords = new ArrayList<>();
@@ -31,7 +36,9 @@ public class GamePlay extends AppCompatActivity {
     private void initialize(){
         lblRoomNumber = findViewById(R.id.lblRoomNumber);
         lblRoomNumber.setText("Room number : " + GlobalData.game.getMapID());
-        lblTurn = findViewById(R.id.lblTurn);
+        lblGuessWord = findViewById(R.id.lblGuessWord);
+        lblClueNumber = findViewById(R.id.lblClueNumber);
+        lblRedPoints = findViewById(R.id.lblRedPoints);
         lblBluePoints = findViewById(R.id.lblBluePoints);
         listBtnsCards.add(findViewById(R.id.btn00));
         listBtnsCards.add(findViewById(R.id.btn01));
@@ -63,6 +70,7 @@ public class GamePlay extends AppCompatActivity {
         btnSpyRed = findViewById(R.id.btnSpyRed);
         btnOprRed = findViewById(R.id.btnObjRed);
         showBoard();
+        listenForCurrentPlayer();
     }
     private void setWordsOnBoardsForSpy(){
         if(GlobalData.game.getListOfWord().size() == 25){
@@ -97,6 +105,29 @@ public class GamePlay extends AppCompatActivity {
                 break;
             default:
         }
+    }
+    private void listenForCurrentPlayer(){
+//        DatabaseHandler.getCurrentTurn(GlobalData.game.getMapID());
+//        Player currentTurn;
+//        new CountDownTimer(2000,1000){
+//            @Override
+//            public void onTick(long l) {
+//            }
+//            @Override
+//            public void onFinish() {
+//                Player currentTurn = GlobalData.game.getCurrentTurn();
+//                String messageForCurrentPlayer = "Current player : " + currentTurn.getRole() + " " + currentTurn.getTeamID();
+//                DialogHandler.displayDialogMessage(getBaseContext(),messageForCurrentPlayer);
+//                if(currentTurn.getRole() == Roles.spymaster && currentTurn.getTeamID() == TeamType.BLUE){
+//                    DialogHandler.displayDialogGuessWord(getBaseContext(),GlobalData.game.getMapID());
+//                }
+//            }
+//        }.start();
+//        DatabaseHandler.getCurrentGuessword(GlobalData.game.getMapID());
+//        if(GlobalData.game.getCurrentGuessWord() != null){
+//            lblGuessWord.setText(GlobalData.game.getCurrentGuessWord().getGuessWord());
+//            lblClueNumber.setText(GlobalData.game.getCurrentGuessWord().getNumberOfGuesses());
+//        }
     }
 
 }

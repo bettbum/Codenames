@@ -1,6 +1,7 @@
 package com.example.codenames.Controller;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -18,8 +19,8 @@ import com.example.codenames.R;
 import java.util.Dictionary;
 
 public class DialogHandler {
-    public static void displayDialogMessage(View v, String message){
-        Dialog dialog = new Dialog(v.getContext());
+    public static void displayDialogMessage(Context ctx, String message){
+        Dialog dialog = new Dialog(ctx);
         dialog.setContentView(R.layout.dialog_message);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(null);
@@ -39,8 +40,8 @@ public class DialogHandler {
             }
         }.start();
     }
-    public static void displayDialogGuessWord(View v) {
-        Dialog dialog = new Dialog(v.getContext());
+    public static void displayDialogGuessWord(Context ctx, String gameId) {
+        Dialog dialog = new Dialog(ctx);
         dialog.setContentView(R.layout.dialog_guessword);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(null);
@@ -83,7 +84,7 @@ public class DialogHandler {
             public void onClick(View v) {
                 String guessWord = edGuessWord.getText().toString();
                 int numberOfGuesses = Integer.parseInt(edNumberOfGuesses.getText().toString());
-                DatabaseHandler.setCurrentGuessWord(new GuessWord(guessWord, numberOfGuesses));
+                DatabaseHandler.setCurrentGuessWord(gameId, new GuessWord(guessWord, numberOfGuesses));
                 dialog.dismiss();
             }
         });

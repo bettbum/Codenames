@@ -91,7 +91,7 @@ public class DatabaseHandler {
                             }
                         });
                         DatabaseHandler.getListOfCurrentPlayer(GlobalData.game.getMapID());
-                        new CountDownTimer(5000,1000){
+                        new CountDownTimer(2000,1000){
                             @Override
                             public void onTick(long l) {
                             }
@@ -103,6 +103,7 @@ public class DatabaseHandler {
                         }.start();
                     }else{
                         //if the room does not exist
+                        DialogHandler.displayDialogMessage(ctx,"The room does not exist");
                     }
 
                 }
@@ -114,10 +115,24 @@ public class DatabaseHandler {
 
 
     }
-    public static void setCurrentGuessWord(GuessWord guessWord){
-        DatabaseReference currentGuessWordRef = gameDatabase.child("currentGuessWord");
+    public static void setCurrentGuessWord(String gameId, GuessWord guessWord){
+        DatabaseReference currentGuessWordRef = gameDatabase.child(gameId).child("currentGuessWord");
         currentGuessWordRef.setValue(guessWord);
     }
+    public static void getCurrentGuessword(String gameId){
+        gameDatabase.child(gameId).child("currentGuessWord").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    GlobalData.game.setCurrentGuessWord(snapshot.getValue(GuessWord.class));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    };
     public static Player addNewPlayer (String gameId){
         Player player = new Player();
         gameDatabase.child(gameId).child("players").child(player.getPlayerID()).setValue(player);
@@ -129,6 +144,23 @@ public class DatabaseHandler {
     public static void addRoleForPlater(String gameId, String playerId, TeamType team, Roles roles){
         GlobalData.currentPlayer = new Player(playerId, team, roles);
         gameDatabase.child(gameId).child("players").child(playerId).setValue(GlobalData.currentPlayer);
+        if(team == TeamType.BLUE && roles == Roles.spymaster){
+            gameDatabase.child(gameId).child("currentTurn").setValue(GlobalData.currentPlayer);
+        }
+    };
+    public static void getCurrentTurn(String gameId){
+        gameDatabase.child(gameId).child("currentTurn").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                   GlobalData.game.setCurrentTurn(snapshot.getValue(Player.class));
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     };
     public static void getListOfCurrentPlayer(String gameId){
         GlobalData.listOfCurrentPlayers = new ArrayList<Player>();

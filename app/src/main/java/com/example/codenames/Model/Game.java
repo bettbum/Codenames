@@ -14,6 +14,24 @@ public class Game {
     private Team teamBlue;
     private TeamType winner;
     private ArrayList<Word> listOfWord;
+    private Player currentTurn;
+    private GuessWord currentGuessWord;
+
+    public GuessWord getCurrentGuessWord() {
+        return currentGuessWord;
+    }
+
+    public void setCurrentGuessWord(GuessWord currentGuessWord) {
+        this.currentGuessWord = currentGuessWord;
+    }
+
+    public Player getCurrentTurn() {
+        return currentTurn;
+    }
+
+    public void setCurrentTurn(Player currentTurn) {
+        this.currentTurn = currentTurn;
+    }
 
     public Boolean getEnded() {
         return isEnded;
