@@ -19,6 +19,7 @@ import com.example.codenames.Model.Game;
 import com.example.codenames.Model.GuessWord;
 import com.example.codenames.Model.MapPlayer;
 import com.example.codenames.Model.Player;
+import com.example.codenames.Model.Team;
 import com.example.codenames.Model.Word;
 import com.example.codenames.R;
 import com.example.codenames.View.Room;
@@ -35,7 +36,7 @@ import java.util.Collections;
 
 public class DatabaseHandler {
     private static FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private static DatabaseReference gameDatabase = db.getReference("game");
+    public static DatabaseReference gameDatabase = db.getReference("game");
 
     public static void testDatabaseConnection(){
         DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
@@ -79,6 +80,7 @@ public class DatabaseHandler {
                             }
                             @Override
                             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                                Log.d("child_changed", "child_changed ");
                             }
                             @Override
                             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
@@ -91,7 +93,7 @@ public class DatabaseHandler {
                             }
                         });
                         DatabaseHandler.getListOfCurrentPlayer(GlobalData.game.getMapID());
-                        new CountDownTimer(2000,1000){
+                        new CountDownTimer(1000,1000){
                             @Override
                             public void onTick(long l) {
                             }
@@ -105,15 +107,15 @@ public class DatabaseHandler {
                         //if the room does not exist
                         DialogHandler.displayDialogMessage(ctx,"The room does not exist");
                     }
-
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
+    }
+    public static void updateRevealedWord(String gameId, int index){
+        gameDatabase.child(gameId).child("listOfWord").child(String.valueOf(index)).child("revealed").setValue("true");
     }
     public static void setCurrentGuessWord(String gameId, GuessWord guessWord){
         DatabaseReference currentGuessWordRef = gameDatabase.child(gameId).child("currentGuessWord");
@@ -125,11 +127,11 @@ public class DatabaseHandler {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     GlobalData.game.setCurrentGuessWord(snapshot.getValue(GuessWord.class));
+                    Log.d("CurrentGuessWord",GlobalData.game.getCurrentGuessWord().toString());
                 }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     };
@@ -145,15 +147,34 @@ public class DatabaseHandler {
         GlobalData.currentPlayer = new Player(playerId, team, roles);
         gameDatabase.child(gameId).child("players").child(playerId).setValue(GlobalData.currentPlayer);
         if(team == TeamType.BLUE && roles == Roles.spymaster){
-            gameDatabase.child(gameId).child("currentTurn").setValue(GlobalData.currentPlayer);
+            changeCurrentTurn(gameId,GlobalData.currentPlayer);
         }
     };
+    public static void changeCurrentTurn (String gameId, Player currentTurn){
+        gameDatabase.child(gameId).child("currentTurn").setValue(currentTurn);
+    }
+    public static void updateTeamWinner(String gameId, TeamType winner){
+        gameDatabase.child(gameId).child("winner").setValue(winner);
+    }
+    public static void updatePoints(String gameId, TeamType winner){
+        if (winner == TeamType.BLUE){
+            int point = GlobalData.game.getBluePoints() + 1;
+            gameDatabase.child(gameId).child("bluePoints").setValue(point);
+        }else{
+            int point = GlobalData.game.getRedPoints() + 1;
+            gameDatabase.child(gameId).child("redPoints").setValue(point);
+        }
+    }
     public static void getCurrentTurn(String gameId){
         gameDatabase.child(gameId).child("currentTurn").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                   GlobalData.game.setCurrentTurn(snapshot.getValue(Player.class));
+                    Player currentTurn = snapshot.getValue(Player.class);
+                    GlobalData.game.setCurrentTurn(currentTurn);
+                    Log.d("currentTurn", GlobalData.game.getCurrentTurn().getPlayerID());
+
+
                 }
             }
             @Override

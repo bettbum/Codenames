@@ -10,8 +10,8 @@ public class Game {
     private String mapID;
     private Boolean isStarted;
     private Boolean isEnded;
-    private Team teamRed;
-    private Team teamBlue;
+    private int bluePoints;
+    private int redPoints;
     private TeamType winner;
     private ArrayList<Word> listOfWord;
     private Player currentTurn;
@@ -24,6 +24,8 @@ public class Game {
     public void setCurrentGuessWord(GuessWord currentGuessWord) {
         this.currentGuessWord = currentGuessWord;
     }
+
+
 
     public Player getCurrentTurn() {
         return currentTurn;
@@ -57,21 +59,6 @@ public class Game {
         isStarted = started;
     }
 
-    public Team getTeamRed() {
-        return teamRed;
-    }
-
-    public void setTeamRed(Team teamRed) {
-        this.teamRed = teamRed;
-    }
-
-    public Team getTeamBlue() {
-        return teamBlue;
-    }
-
-    public void setTeamBlue(Team teamBlue) {
-        this.teamBlue = teamBlue;
-    }
 
     public TeamType getWinner() {
         return winner;
@@ -89,11 +76,9 @@ public class Game {
         this.listOfWord = listOfWord;
     }
 
-    public Game(String mapID, Boolean isStarted, Team teamRed, Team teamBlue) {
+    public Game(String mapID, Boolean isStarted) {
         this.mapID = mapID;
         this.isStarted = isStarted;
-        this.teamRed = teamRed;
-        this.teamBlue = teamBlue;
     }
     public Game(String mapID){
         this.mapID = mapID;
@@ -103,7 +88,22 @@ public class Game {
         this.mapID = String.valueOf(randomId);
         this.isStarted = false;
         this.isEnded = false;
-        this.teamRed = null;
-        this.teamBlue = null;
+        this.bluePoints = 0;
+        this.redPoints = 0;
+    }
+    public int getBluePoints() {
+        return bluePoints;
+    }
+
+    public void setBluePoints(int bluePoints) {
+        this.bluePoints = bluePoints;
+    }
+
+    public int getRedPoints() {
+        return redPoints;
+    }
+
+    public void setRedPoints(int redPoints) {
+        this.redPoints = redPoints;
     }
 }

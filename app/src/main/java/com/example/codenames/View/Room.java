@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
@@ -90,8 +91,16 @@ public class Room extends AppCompatActivity {
                     DatabaseHandler.addRoleForPlater(GlobalData.game.getMapID(), GlobalData.currentPlayer.getPlayerID(), team, role);
                 }
                 if(GlobalData.listOfCurrentPlayers.size() == 4){
-                    Intent intent = new Intent(Room.this, GamePlay.class);
-                    startActivity(intent);
+                    new CountDownTimer(1000,1000){
+                        @Override
+                        public void onTick(long l) {
+                        }
+                        @Override
+                        public void onFinish() {
+                            Intent intent = new Intent(Room.this, GamePlay.class);
+                            startActivity(intent);
+                        }
+                    }.start();
                 }
             }
         });

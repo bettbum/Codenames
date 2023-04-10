@@ -5,10 +5,13 @@ import static com.example.codenames.Controller.DatabaseHandler.testDatabaseConne
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.codenames.Controller.DialogHandler;
 import com.example.codenames.View.MainMenu;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         //testing if the words are on board
 //        Intent i = new Intent(this, GamePlay.class);
 //        startActivity(i);
+
+
+
         testDatabaseConnection();
         //Testing guessword dialog
 //        Button dialogbtn = findViewById(R.id.btnTestDialog);

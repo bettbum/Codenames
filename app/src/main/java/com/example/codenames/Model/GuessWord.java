@@ -24,4 +24,6 @@ public class GuessWord {
         this.guessWord = guessWord;
         this.numberOfGuesses = numberOfGuesses;
     }
+
+    public GuessWord() {}
 }

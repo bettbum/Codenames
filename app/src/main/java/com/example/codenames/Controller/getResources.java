@@ -41,8 +41,9 @@ public class getResources {
         // Point to the be start
         int start = wordFinish - numOfLineToRead;
         // Create a sublist with the start and finish indexes.
-        for (String line : lines.subList(start, wordFinish))
+        for (String line : lines.subList(start, wordFinish)) {
             temp.add(line);
+        }
         return temp;
     }
     //not enough 25
@@ -58,12 +59,12 @@ public class getResources {
         //map has 1 gray Card
         original.add(black);
 
-        //map has 9 red Card
-        for (int i = 0; i < 9; i++) {
+
+        for (int i = 0; i < 8; i++) {
             original.add(red);
         }
-        //map has 8 red Card
-        for (int i = 0; i < 8; i++) {
+
+        for (int i = 0; i < 9; i++) {
             original.add(blue);
         }
         //map has 7 yellow card

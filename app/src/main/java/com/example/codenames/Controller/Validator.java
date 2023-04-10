@@ -2,6 +2,7 @@ package com.example.codenames.Controller;
 
 import android.graphics.Color;
 
+import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.Model.Team;
 import com.example.codenames.Model.Word;
 
@@ -15,16 +16,33 @@ public class Validator {
         return m.matches() ? true : false;
     }
 
-    public static int isCorrectWord(int index, Team team){
+    //case 0 : lose
+    //case 1: continue without losing
+    //case 2 : correct -> continue guessing
+    //case 3: next turn
+    //case -1: invalid
+    public static int isCorrectWord(int index, TeamType teamType){
         ArrayList<Word> listOfWOrds = GlobalData.game.getListOfWord();
         if (listOfWOrds.get(index).getColor() == Color.BLACK) {
             return 0;
         }else if (listOfWOrds.get(index).getColor() == Color.YELLOW) {
             return 1;
-        }else if (team.getColor().equals(listOfWOrds.get(index).getColor())) {
-            return 2;
-        }else
-            return 3;
+        }else if (teamType == TeamType.RED) {
+            //if the red team chose the correct color
+            if (listOfWOrds.get(index).getColor() == -2090984){
+                return 2;
+            }else{
+                return 3;
+            }
+        }else if(teamType == TeamType.BLUE) {
+            //if the blue team chose the correct color
+            if (listOfWOrds.get(index).getColor() == -16383492){
+                return 2;
+            }else{
+                return 3;
+            }
+        }
+        return -1;
     }
 
 }

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -13,8 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.codenames.Model.Enum.Roles;
 import com.example.codenames.Model.GuessWord;
+import com.example.codenames.Model.Player;
 import com.example.codenames.R;
+import com.example.codenames.View.GamePlay;
 
 import java.util.Dictionary;
 
@@ -27,7 +31,7 @@ public class DialogHandler {
         dialog.setCancelable(false);
         dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
         TextView lblMessage = dialog.findViewById(R.id.lblMessage);
-        lblMessage.setText("Wrong word");
+        lblMessage.setText(message);
         dialog.show();
         new CountDownTimer(2000,1000){
             @Override
@@ -85,7 +89,13 @@ public class DialogHandler {
                 String guessWord = edGuessWord.getText().toString();
                 int numberOfGuesses = Integer.parseInt(edNumberOfGuesses.getText().toString());
                 DatabaseHandler.setCurrentGuessWord(gameId, new GuessWord(guessWord, numberOfGuesses));
-                dialog.dismiss();
+                DatabaseHandler.getCurrentGuessword(GlobalData.game.getMapID());
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                    }
+                },100);
             }
         });
         dialog.show();
