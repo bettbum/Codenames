@@ -2,7 +2,6 @@ package com.example.codenames.Controller;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.Editable;
@@ -14,15 +13,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.codenames.Model.Enum.Roles;
+import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.Model.GuessWord;
-import com.example.codenames.Model.Player;
 import com.example.codenames.R;
-import com.example.codenames.View.GamePlay;
-
-import java.util.Dictionary;
 
 public class DialogHandler {
+
+    public  static void displayWinner(Context ctx, TeamType team){
+        Dialog dialog = new Dialog(ctx);
+        dialog.setContentView(R.layout.dialog_winner);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(null);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+        TextView lblTeamWinner = dialog.findViewById(R.id.lblTeamWinner);
+        if (team == TeamType.RED)
+            lblTeamWinner.setText("RED TEAM");
+        else lblTeamWinner.setText("BLUE TEAM");
+        Button btnBack = dialog.findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //add
+            }
+        });
+        dialog.show();
+    }
     public static void displayDialogMessage(Context ctx, String message){
         Dialog dialog = new Dialog(ctx);
         dialog.setContentView(R.layout.dialog_message);
@@ -55,7 +70,7 @@ public class DialogHandler {
         EditText edNumberOfGuesses = dialog.findViewById(R.id.edNumOfGuesses);
         TextView lblErrorNumOfGuesses = dialog.findViewById(R.id.lblErrorNumOfGuesses);
         TextView lblErrorGuessWord = dialog.findViewById(R.id.lblErrorGuessWord);
-        Button btnSubmit = dialog.findViewById(R.id.btnSubmit);
+        Button btnSubmit = dialog.findViewById(R.id.btnBack);
         edGuessWord.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

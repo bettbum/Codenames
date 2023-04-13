@@ -1,6 +1,7 @@
 package com.example.codenames.View;
 
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -22,6 +23,7 @@ import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.Model.Game;
 import com.example.codenames.Model.GuessWord;
 import com.example.codenames.Model.Player;
+import com.example.codenames.Model.Team;
 import com.example.codenames.Model.Word;
 import com.example.codenames.R;
 import com.google.firebase.database.DataSnapshot;
@@ -80,19 +82,46 @@ public class GamePlay extends AppCompatActivity{
                     int result = Validator.isCorrectWord(finalI, GlobalData.game.getCurrentTurn().getTeamID());
                     listBtnsCards.get(finalI).setBackgroundColor(GlobalData.game.getListOfWord().get(finalI).getColor());
                     DatabaseHandler.updateRevealedWord(GlobalData.game.getMapID(),finalI);
+                    TeamType currentTeamType = GlobalData.game.getCurrentTurn().getTeamID();
                     switch(result){
                         //handle the cases when the user pick a card
                         case 0:
+                            //case 0 : lose
+                            if (currentTeamType == TeamType.RED){
+                                GlobalData.game.setWinner(TeamType.BLUE);
+                            }else{
+                                GlobalData.game.setWinner(TeamType.RED);
+                            }
+                            DialogHandler.displayWinner(v.getContext(),GlobalData.game.getWinner());
                             break;
                         case 1:
+                            //case 1: continue without losing
+                            nextTurn();
                             break;
                         case 2:
+                            //case 2 : correct -> continue guessing
+                            //get the current numbers of guess
+                            int currNumOfGuess = GlobalData.game.getCurrentGuessWord().getNumberOfGuesses();
+                            //increase currentTeam point
+                            if (currentTeamType == TeamType.RED){
+                                int currRedPoint = GlobalData.game.getRedPoints();
+                                GlobalData.game.setRedPoints(currRedPoint + 1);
+                            }else{
+                                int currBluePoint = GlobalData.game.getBluePoints();
+                                GlobalData.game.setBluePoints(currBluePoint + 1);
+                            }
+                            //reduce the number of time to guess
+                            if (currNumOfGuess > 0)
+                                GlobalData.game.getCurrentGuessWord().setNumberOfGuesses(currNumOfGuess - 1);
+                            else nextTurn();
                             break;
                         case 3:
+                            //case 3: next turn
                             DialogHandler.displayDialogMessage(v.getContext(), "Wrong word");
                             nextTurn();
                             break;
                         case -1:
+                            //case -1: invalid
                             break;
                     }
                 }
@@ -107,6 +136,22 @@ public class GamePlay extends AppCompatActivity{
         listenForCurrentPlayer();
         btnEndTurnOnCLick();
     }
+
+    private Boolean hasWinner(){
+        if(GlobalData.game.getWinner() != null){
+            return true;
+        }
+        return false;
+    }
+
+    private TeamType checkWinner(){
+        if(GlobalData.game.getBluePoints() == 8)
+            return TeamType.BLUE;
+        if(GlobalData.game.getRedPoints() == 8)
+            return TeamType.RED;
+        return null;
+    }
+
     private void setWordsOnBoardsForSpy(){
         if(GlobalData.game.getListOfWord().size() == 25){
             for(int i = 0; i < GlobalData.game.getListOfWord().size(); i++){

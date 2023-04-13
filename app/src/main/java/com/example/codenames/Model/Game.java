@@ -35,12 +35,9 @@ public class Game {
         this.currentTurn = currentTurn;
     }
 
-    public Boolean getEnded() {
-        return isEnded;
-    }
-
     public void setEnded(Boolean ended) {
         isEnded = ended;
+        winner = null;
     }
 
     public String getMapID() {
