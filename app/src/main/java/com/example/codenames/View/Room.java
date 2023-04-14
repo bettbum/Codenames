@@ -43,7 +43,7 @@ public class Room extends AppCompatActivity {
             lblRoomNumber.setText("Room number : " + GlobalData.game.getMapID());
         }
         lblNumberOfPlayersJoined = findViewById(R.id.lblNumberOfPlayersJoined);
-        lblNumberOfPlayersJoined.setText("Number of players joined : " + (GlobalData.listOfCurrentPlayers.size()+1));
+
         btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,10 +128,12 @@ public class Room extends AppCompatActivity {
                 } else if (player.getTeamID() == TeamType.RED && player.getRole() == Roles.spymaster) {
                     btnSpymasterRed.setEnabled(false);
                 }
+                lblNumberOfPlayersJoined.setText("Number of players joined : " + GlobalData.listOfCurrentPlayers.size());
+                Log.d("Globaldata", String.valueOf(GlobalData.listOfCurrentPlayers.size()));
             }
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(GlobalData.listOfCurrentPlayers.size() == 4){
+                if(GlobalData.listOfCurrentPlayers.size() >= 4){
                     Intent intent = new Intent(Room.this, GamePlay.class);
                     startActivity(intent);
                 }

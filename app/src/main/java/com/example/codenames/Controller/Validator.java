@@ -23,9 +23,9 @@ public class Validator {
     //case -1: invalid
     public static int isCorrectWord(int index, TeamType teamType){
         ArrayList<Word> listOfWOrds = GlobalData.game.getListOfWord();
-        if (listOfWOrds.get(index).getColor() == Color.BLACK) {
+        if (listOfWOrds.get(index).getColor() == -16777216) {
             return 0;
-        }else if (listOfWOrds.get(index).getColor() == Color.YELLOW) {
+        }else if (listOfWOrds.get(index).getColor() == -676096) {
             return 1;
         }else if (teamType == TeamType.RED) {
             //if the red team chose the correct color
