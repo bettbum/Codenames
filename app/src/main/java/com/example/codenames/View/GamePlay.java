@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.codenames.Controller.DatabaseHandler;
@@ -26,6 +27,7 @@ import com.example.codenames.Model.Player;
 import com.example.codenames.Model.Team;
 import com.example.codenames.Model.Word;
 import com.example.codenames.R;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -48,7 +50,9 @@ public class GamePlay extends AppCompatActivity{
         lblGuessWord = findViewById(R.id.lblGuessWord);
         lblClueNumber = findViewById(R.id.lblClueNumber);
         lblRedPoints = findViewById(R.id.lblRedPoints);
+        lblRedPoints.setText("0");
         lblBluePoints = findViewById(R.id.lblBluePoints);
+        lblBluePoints.setText("0");
         listBtnsCards.add(findViewById(R.id.btn00));
         listBtnsCards.add(findViewById(R.id.btn01));
         listBtnsCards.add(findViewById(R.id.btn02));
@@ -92,7 +96,8 @@ public class GamePlay extends AppCompatActivity{
                             }else{
                                 GlobalData.game.setWinner(TeamType.RED);
                             }
-                            DialogHandler.displayWinner(v.getContext(),GlobalData.game.getWinner());
+                            DatabaseHandler.updateTeamWinner(GlobalData.game.getMapID(),currentTeamType);
+                            DialogHandler.displayWinner(GamePlay.this,GlobalData.game.getWinner());
                             break;
                         case 1:
                             //case 1: continue without losing
@@ -102,26 +107,26 @@ public class GamePlay extends AppCompatActivity{
                             //case 2 : correct -> continue guessing
                             //get the current numbers of guess
                             int currNumOfGuess = GlobalData.game.getCurrentGuessWord().getNumberOfGuesses();
-                            //increase currentTeam point
                             if (currentTeamType == TeamType.RED){
                                 int currRedPoint = GlobalData.game.getRedPoints();
                                 GlobalData.game.setRedPoints(currRedPoint + 1);
+                                DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.RED);
                             }else{
                                 int currBluePoint = GlobalData.game.getBluePoints();
                                 GlobalData.game.setBluePoints(currBluePoint + 1);
+                                DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.BLUE);
                             }
                             //reduce the number of time to guess
-                            if (currNumOfGuess > 0)
+                            if (currNumOfGuess > 0) {
                                 GlobalData.game.getCurrentGuessWord().setNumberOfGuesses(currNumOfGuess - 1);
+                                lblClueNumber.setText(GlobalData.game.getCurrentGuessWord().getNumberOfGuesses());
+                            }
                             else nextTurn();
                             break;
                         case 3:
                             //case 3: next turn
                             DialogHandler.displayDialogMessage(v.getContext(), "Wrong word");
                             nextTurn();
-                            break;
-                        case -1:
-                            //case -1: invalid
                             break;
                     }
                 }
@@ -135,23 +140,10 @@ public class GamePlay extends AppCompatActivity{
         showBoard();
         listenForCurrentPlayer();
         btnEndTurnOnCLick();
+        listenForWordChanged();
+        listenForBluePointsChanged();
+        listenForRedPointsChanged();
     }
-
-    private Boolean hasWinner(){
-        if(GlobalData.game.getWinner() != null){
-            return true;
-        }
-        return false;
-    }
-
-    private TeamType checkWinner(){
-        if(GlobalData.game.getBluePoints() == 8)
-            return TeamType.BLUE;
-        if(GlobalData.game.getRedPoints() == 8)
-            return TeamType.RED;
-        return null;
-    }
-
     private void setWordsOnBoardsForSpy(){
         if(GlobalData.game.getListOfWord().size() == 25){
             for(int i = 0; i < GlobalData.game.getListOfWord().size(); i++){
@@ -205,10 +197,9 @@ public class GamePlay extends AppCompatActivity{
                     DialogHandler.displayDialogMessage(GamePlay.this,messageForCurrentPlayer);
                     setColorButtons(currentTurn);
                     if(GlobalData.game.getCurrentTurn().getPlayerID().equals(GlobalData.currentPlayer.getPlayerID())){
+                        DialogHandler.displayDialogMessage(GamePlay.this,"YOUR TURN");
                         if (currentTurn.getRole() == Roles.spymaster) {
                             DialogHandler.displayDialogGuessWord(GamePlay.this, GlobalData.game.getMapID());
-                        }else if (currentTurn.getRole() == Roles.operative){
-
                         }
                     }
                 }
@@ -240,11 +231,11 @@ public class GamePlay extends AppCompatActivity{
         if(currentTurn.getTeamID() == TeamType.BLUE && currentTurn.getRole() == Roles.spymaster){
             btnSpyBlue.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_blue));
         }else if (currentTurn.getTeamID() == TeamType.BLUE && currentTurn.getRole() == Roles.operative){
-            btnSpyBlue.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_blue));
+            btnOprBlue.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_blue));
         }else if (currentTurn.getTeamID() == TeamType.RED && currentTurn.getRole() == Roles.spymaster){
-            btnSpyBlue.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_red));
+            btnSpyRed.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_red));
         }else if (currentTurn.getTeamID() == TeamType.RED && currentTurn.getRole() == Roles.operative){
-            btnSpyBlue.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_red));
+            btnOprRed.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_red));
         }
     }
     private void nextTurn(){
@@ -295,6 +286,91 @@ public class GamePlay extends AppCompatActivity{
                 DatabaseHandler.changeCurrentTurn(gameId, nextPlayer);
             }
         }
+    }
+    private void listenForWordChanged(){
+        DatabaseHandler.gameDatabase.child(GlobalData.game.getMapID()).child("listOfWord").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if(snapshot.exists()){
+                    if(snapshot.hasChild("revealed")){
+                        Boolean isRevealed = snapshot.child("revealed").getValue(Boolean.class);
+                        int color = snapshot.child("color").getValue(Integer.class);
+                        int id = Integer.valueOf(snapshot.getKey());
+                        if(isRevealed){
+                            if(GlobalData.game.getCurrentTurn().getRole() == Roles.spymaster){
+                                listBtnsCards.get(id).setText("");
+                            }else{
+                                listBtnsCards.get(id).setBackgroundColor(color);
+                            }
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            }
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+    private void listenForBluePointsChanged(){
+        DatabaseHandler.gameDatabase.child(GlobalData.game.getMapID()).child("bluePoints").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    int points = snapshot.getValue(Integer.class);
+                    lblBluePoints.setText(String.valueOf(points));
+                    if(points == 8){
+                        //blue win
+                        GlobalData.game.setWinner(TeamType.BLUE);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+    private void listenForRedPointsChanged(){
+        DatabaseHandler.gameDatabase.child(GlobalData.game.getMapID()).child("redPoints").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    int points = snapshot.getValue(Integer.class);
+                    lblRedPoints.setText(String.valueOf(points));
+                    if(points == 9){
+                        GlobalData.game.setWinner(TeamType.RED);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+    private void listenForTeamWinner(){
+        DatabaseHandler.gameDatabase.child(GlobalData.game.getMapID()).child("winner").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    TeamType winner = snapshot.getValue(TeamType.class);
+                    DialogHandler.displayWinner(GamePlay.this,winner);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 

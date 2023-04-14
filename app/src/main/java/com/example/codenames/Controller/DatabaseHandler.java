@@ -80,7 +80,6 @@ public class DatabaseHandler {
                             }
                             @Override
                             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                                Log.d("child_changed", "child_changed ");
                             }
                             @Override
                             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
@@ -92,7 +91,6 @@ public class DatabaseHandler {
                             public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
-                        DatabaseHandler.getListOfCurrentPlayer(GlobalData.game.getMapID());
                         new CountDownTimer(1000,1000){
                             @Override
                             public void onTick(long l) {
@@ -115,7 +113,7 @@ public class DatabaseHandler {
         });
     }
     public static void updateRevealedWord(String gameId, int index){
-        gameDatabase.child(gameId).child("listOfWord").child(String.valueOf(index)).child("revealed").setValue("true");
+        gameDatabase.child(gameId).child("listOfWord").child(String.valueOf(index)).child("revealed").setValue(true);
     }
     public static void setCurrentGuessWord(String gameId, GuessWord guessWord){
         DatabaseReference currentGuessWordRef = gameDatabase.child(gameId).child("currentGuessWord");
@@ -156,8 +154,8 @@ public class DatabaseHandler {
     public static void updateTeamWinner(String gameId, TeamType winner){
         gameDatabase.child(gameId).child("winner").setValue(winner);
     }
-    public static void updatePoints(String gameId, TeamType winner){
-        if (winner == TeamType.BLUE){
+    public static void updatePoints(String gameId, TeamType teamGetPoint){
+        if (teamGetPoint == TeamType.BLUE){
             int point = GlobalData.game.getBluePoints() + 1;
             gameDatabase.child(gameId).child("bluePoints").setValue(point);
         }else{
@@ -165,77 +163,4 @@ public class DatabaseHandler {
             gameDatabase.child(gameId).child("redPoints").setValue(point);
         }
     }
-    public static void getCurrentTurn(String gameId){
-        gameDatabase.child(gameId).child("currentTurn").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    Player currentTurn = snapshot.getValue(Player.class);
-                    GlobalData.game.setCurrentTurn(currentTurn);
-                    Log.d("currentTurn", GlobalData.game.getCurrentTurn().getPlayerID());
-
-
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    };
-    public static void getListOfCurrentPlayer(String gameId){
-        GlobalData.listOfCurrentPlayers = new ArrayList<Player>();
-        gameDatabase.child(gameId).child("players").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Player player = snapshot.getValue(Player.class);
-                GlobalData.listOfCurrentPlayers.add(player);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    };
-    public static void deleteGame(){
-        gameDatabase.child("1565").child("players").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                String userId = snapshot.getKey();
-                gameDatabase.child("1565").child("players").removeValue();
-            }
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            }
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-            }
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-
-
-
-
 }

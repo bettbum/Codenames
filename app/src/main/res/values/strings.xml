@@ -7,7 +7,7 @@
     <string name="operative_blue_team">Operative</string>
     <string name="spymaster_blue_team">spymaster</string>
     <string name="operative_red_team">Operative</string>
-    <string name="spypaster_red_team">spypaster</string>
+    <string name="spypaster_red_team">spymaster</string>
     <string name="number_of_players_joined">Number of players joined : 3</string>
     <string name="btn_back">BACK</string>
     <string name="btn_ready">ready</string>

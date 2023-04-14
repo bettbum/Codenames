@@ -51,7 +51,6 @@ public class MainMenu extends AppCompatActivity {
     }
     private void createRoom() throws IOException {
         String gameId = DatabaseHandler.createNewGame(getBaseContext());
-        DatabaseHandler.getListOfCurrentPlayer(GlobalData.game.getMapID());
         new CountDownTimer(1000,1000){
             @Override
             public void onTick(long l) {
@@ -63,7 +62,6 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(i);
             }
         }.start();
-
     }
     private void joinRoom(){
         Intent i = new Intent(this, JoinRoom.class);
