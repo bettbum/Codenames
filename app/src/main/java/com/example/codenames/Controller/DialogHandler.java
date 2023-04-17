@@ -105,7 +105,7 @@ public class DialogHandler {
                 String guessWord = edGuessWord.getText().toString();
                 int numberOfGuesses = Integer.parseInt(edNumberOfGuesses.getText().toString());
                 DatabaseHandler.setCurrentGuessWord(gameId, new GuessWord(guessWord, numberOfGuesses));
-                DatabaseHandler.getCurrentGuessword(GlobalData.game.getMapID());
+                DatabaseHandler.getCurrentGuessWord(GlobalData.game.getMapID());
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {

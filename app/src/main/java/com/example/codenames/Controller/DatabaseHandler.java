@@ -2,26 +2,18 @@ package com.example.codenames.Controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.CountDownTimer;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.example.codenames.Model.Enum.Roles;
 import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.Model.Game;
 import com.example.codenames.Model.GuessWord;
-import com.example.codenames.Model.MapPlayer;
 import com.example.codenames.Model.Player;
-import com.example.codenames.Model.Team;
 import com.example.codenames.Model.Word;
-import com.example.codenames.R;
 import com.example.codenames.View.Room;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class DatabaseHandler {
     private static FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -119,7 +110,7 @@ public class DatabaseHandler {
         DatabaseReference currentGuessWordRef = gameDatabase.child(gameId).child("currentGuessWord");
         currentGuessWordRef.setValue(guessWord);
     }
-    public static void getCurrentGuessword(String gameId){
+    public static void getCurrentGuessWord(String gameId){
         gameDatabase.child(gameId).child("currentGuessWord").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -141,7 +132,7 @@ public class DatabaseHandler {
     public static void removePlayer (String gameId, String playerId){
         gameDatabase.child(gameId).child("players").child(playerId).removeValue();
     };
-    public static void addRoleForPlater(String gameId, String playerId, TeamType team, Roles roles){
+    public static void addRoleForPlayer(String gameId, String playerId, TeamType team, Roles roles){
         GlobalData.currentPlayer = new Player(playerId, team, roles);
         gameDatabase.child(gameId).child("players").child(playerId).setValue(GlobalData.currentPlayer);
         if(team == TeamType.BLUE && roles == Roles.spymaster){

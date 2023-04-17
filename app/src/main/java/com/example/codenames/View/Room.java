@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +21,6 @@ import com.example.codenames.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-
-import java.util.ArrayList;
 
 public class Room extends AppCompatActivity {
     TextView lblRoomNumber, lblNumberOfPlayersJoined;
@@ -95,7 +91,7 @@ public class Room extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(GlobalData.game != null){
-                    DatabaseHandler.addRoleForPlater(GlobalData.game.getMapID(), GlobalData.currentPlayer.getPlayerID(), team, role);
+                    DatabaseHandler.addRoleForPlayer(GlobalData.game.getMapID(), GlobalData.currentPlayer.getPlayerID(), team, role);
                 }
             }
         });
@@ -129,7 +125,7 @@ public class Room extends AppCompatActivity {
                     btnSpymasterRed.setEnabled(false);
                 }
                 lblNumberOfPlayersJoined.setText("Number of players joined : " + GlobalData.listOfCurrentPlayers.size());
-                Log.d("Globaldata", String.valueOf(GlobalData.listOfCurrentPlayers.size()));
+                Log.d("GlobalData", String.valueOf(GlobalData.listOfCurrentPlayers.size()));
             }
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
