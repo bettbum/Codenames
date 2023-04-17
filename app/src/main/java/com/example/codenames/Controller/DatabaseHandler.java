@@ -163,4 +163,7 @@ public class DatabaseHandler {
             gameDatabase.child(gameId).child("redPoints").setValue(point);
         }
     }
+    public static void updateNumberOfGuesses(String gameId){
+        gameDatabase.child(gameId).child("currentGuessWord").child("numberOfGuesses").setValue(GlobalData.game.getCurrentGuessWord().getNumberOfGuesses());
+    }
 }

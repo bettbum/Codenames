@@ -16,6 +16,15 @@ public class Game {
     private ArrayList<Word> listOfWord;
     private Player currentTurn;
     private GuessWord currentGuessWord;
+    private ArrayList<Player> currentPlayers;
+
+    public ArrayList<Player> getCurrentPlayers() {
+        return currentPlayers;
+    }
+
+    public void setCurrentPlayers(ArrayList<Player> currentPlayers) {
+        this.currentPlayers = currentPlayers;
+    }
 
     public GuessWord getCurrentGuessWord() {
         return currentGuessWord;
@@ -24,9 +33,6 @@ public class Game {
     public void setCurrentGuessWord(GuessWord currentGuessWord) {
         this.currentGuessWord = currentGuessWord;
     }
-
-
-
     public Player getCurrentTurn() {
         return currentTurn;
     }
@@ -79,6 +85,7 @@ public class Game {
     }
     public Game(String mapID){
         this.mapID = mapID;
+        this.currentPlayers = new ArrayList<Player>();
     }
     public Game(){
         int randomId = (int)Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
@@ -87,6 +94,7 @@ public class Game {
         this.isEnded = false;
         this.bluePoints = 0;
         this.redPoints = 0;
+        this.currentPlayers = new ArrayList<Player>();
     }
     public int getBluePoints() {
         return bluePoints;

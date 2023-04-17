@@ -118,7 +118,7 @@ public class Room extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Player player = snapshot.getValue(Player.class);
-                GlobalData.listOfCurrentPlayers.add(player);
+                GlobalData.game.getCurrentPlayers().add(player);
                 if (player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.operative) {
                     btnObjectiveBlue.setEnabled(false);
                 } else if (player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.spymaster) {
@@ -128,14 +128,39 @@ public class Room extends AppCompatActivity {
                 } else if (player.getTeamID() == TeamType.RED && player.getRole() == Roles.spymaster) {
                     btnSpymasterRed.setEnabled(false);
                 }
-                lblNumberOfPlayersJoined.setText("Number of players joined : " + GlobalData.listOfCurrentPlayers.size());
-                Log.d("Globaldata", String.valueOf(GlobalData.listOfCurrentPlayers.size()));
+                lblNumberOfPlayersJoined.setText("Number of players joined : " + GlobalData.game.getCurrentPlayers().size());
+                Log.d("Globaldata", String.valueOf(GlobalData.game.getCurrentPlayers().size()));
             }
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(GlobalData.listOfCurrentPlayers.size() >= 4){
-                    Intent intent = new Intent(Room.this, GamePlay.class);
-                    startActivity(intent);
+                Player player = snapshot.getValue(Player.class);
+                if (player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.operative) {
+                    btnObjectiveBlue.setEnabled(false);
+                } else if (player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.spymaster) {
+                    btnSpymasterBlue.setEnabled(false);
+                } else if (player.getTeamID() == TeamType.RED && player.getRole() == Roles.operative) {
+                    btnObjectiveRed.setEnabled(false);
+                } else if (player.getTeamID() == TeamType.RED && player.getRole() == Roles.spymaster) {
+                    btnSpymasterRed.setEnabled(false);
+                }
+                for (int i = 0; i < GlobalData.game.getCurrentPlayers().size(); i++) {
+                    if(GlobalData.game.getCurrentPlayers().get(i).getPlayerID().equals(player.getPlayerID())){
+                        GlobalData.game.getCurrentPlayers().set(i, player);
+                    }
+                }
+                if(GlobalData.game.getCurrentPlayers().size() >= 4){
+                    boolean isEnoughPlayers = true;
+                    for (Player pl : GlobalData.listOfCurrentPlayers){
+                        if(pl.getTeamID() == null || pl.getRole() == null){
+                            isEnoughPlayers = false;
+                            Log.d("not enough players" , "not enough players");
+                            break;
+                        }
+                    }
+                    if(isEnoughPlayers) {
+                        Intent intent = new Intent(Room.this, GamePlay.class);
+                        startActivity(intent);
+                    }
                 }
             }
             @Override

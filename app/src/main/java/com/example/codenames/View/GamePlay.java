@@ -104,22 +104,23 @@ public class GamePlay extends AppCompatActivity{
                             nextTurn();
                             break;
                         case 2:
-                            //case 2 : correct -> continue guessing
-                            //get the current numbers of guess
                             int currNumOfGuess = GlobalData.game.getCurrentGuessWord().getNumberOfGuesses();
-                            if (currentTeamType == TeamType.RED){
-                                DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.RED);
-                            }else{
-                                DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.BLUE);
-                            }
                             //reduce the number of time to guess
-                            if (currNumOfGuess > 0) {
+                            if (currNumOfGuess > 0) { //update database current number of guess
                                 GlobalData.game.getCurrentGuessWord().setNumberOfGuesses(currNumOfGuess - 1);
-                                lblClueNumber.setText(String.valueOf(GlobalData.game.getCurrentGuessWord().getNumberOfGuesses()));
+                                DatabaseHandler.updateNumberOfGuesses(GlobalData.game.getMapID());
+
+                                //case 2 : correct -> continue guessing
+                                //get the current numbers of guess
+                                if (currentTeamType == TeamType.RED){
+                                    DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.RED);
+                                }else{
+                                    DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.BLUE);
+                                }
                             }else if (currNumOfGuess == 0 ){
                                 nextTurn();
                             }
-                            else nextTurn();
+
                             break;
                         case 3:
                             //case 3: next turn
@@ -241,7 +242,7 @@ public class GamePlay extends AppCompatActivity{
         String gameId = GlobalData.game.getMapID();
         if(currentTurn.getTeamID() == TeamType.BLUE && currentTurn.getRole() == Roles.spymaster){
             Player nextPlayer = null;
-            for(Player player : GlobalData.listOfCurrentPlayers){
+            for(Player player : GlobalData.game.getCurrentPlayers()){
                 if(player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.operative){
                     nextPlayer = player;
                     break;
@@ -252,7 +253,7 @@ public class GamePlay extends AppCompatActivity{
             }
         }else if (currentTurn.getTeamID() == TeamType.BLUE && currentTurn.getRole() == Roles.operative){
             Player nextPlayer = null;
-            for(Player player : GlobalData.listOfCurrentPlayers){
+            for(Player player : GlobalData.game.getCurrentPlayers()){
                 if(player.getTeamID() == TeamType.RED && player.getRole() == Roles.spymaster){
                     nextPlayer = player;
                     break;
@@ -263,7 +264,7 @@ public class GamePlay extends AppCompatActivity{
             }
         }else if (currentTurn.getTeamID() == TeamType.RED && currentTurn.getRole() == Roles.spymaster){
             Player nextPlayer = null;
-            for(Player player : GlobalData.listOfCurrentPlayers){
+            for(Player player : GlobalData.game.getCurrentPlayers()){
                 if(player.getTeamID() == TeamType.RED && player.getRole() == Roles.operative){
                     nextPlayer = player;
                     break;
@@ -274,7 +275,7 @@ public class GamePlay extends AppCompatActivity{
             }
         }else if (currentTurn.getTeamID() == TeamType.RED && currentTurn.getRole() == Roles.operative){
             Player nextPlayer = null;
-            for(Player player : GlobalData.listOfCurrentPlayers){
+            for(Player player : GlobalData.game.getCurrentPlayers()){
                 if(player.getTeamID() == TeamType.BLUE && player.getRole() == Roles.spymaster){
                     nextPlayer = player;
                     break;
@@ -370,6 +371,7 @@ public class GamePlay extends AppCompatActivity{
             }
         });
     }
+
 
 
 }
