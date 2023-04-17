@@ -92,10 +92,10 @@ public class DatabaseHandler {
                                 ctx.startActivity(i);
                             }
                         }.start();
-                    }else{
-                        //if the room does not exist
-                        DialogHandler.displayDialogMessage(ctx,"The room does not exist");
                     }
+                }else{
+                    //if the room does not exist
+                    DialogHandler.displayDialogMessage(ctx,"The room does not exist");
                 }
             }
             @Override

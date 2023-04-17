@@ -335,6 +335,7 @@ public class GamePlay extends AppCompatActivity{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     int points = snapshot.getValue(Integer.class);
+                    GlobalData.game.setBluePoints(points);
                     lblBluePoints.setText(String.valueOf(points));
                     if(points == 9){
                         //blue win
@@ -353,10 +354,10 @@ public class GamePlay extends AppCompatActivity{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     int points = snapshot.getValue(Integer.class);
+                    GlobalData.game.setRedPoints(points);
                     lblRedPoints.setText(String.valueOf(points));
                     if(points == 8){
                         DatabaseHandler.updateTeamWinner(GlobalData.game.getMapID(),TeamType.RED);
-
                     }
                 }
             }
@@ -388,16 +389,17 @@ public class GamePlay extends AppCompatActivity{
                     GlobalData.game.setNumberOfCardsRevealed(numberOfCardsRevealed);
                     if (numberOfCardsRevealed == 25){
                         DialogHandler.displayDialogMessage(GamePlay.this, "All the cards are revealed. Please go back to the main menu to start new game");
+                        new CountDownTimer(2000,1000){
+                            @Override
+                            public void onTick(long l) {
+                                DialogHandler.displayWinner(GamePlay.this, TeamType.undefined);
+                            }
+                            @Override
+                            public void onFinish() {
+                            }
+                        }.start();
                     }
-                    new CountDownTimer(2000,1000){
-                        @Override
-                        public void onTick(long l) {
-                            DialogHandler.displayWinner(GamePlay.this, TeamType.undefined);
-                        }
-                        @Override
-                        public void onFinish() {
-                        }
-                    }.start();
+
                 }
             }
             @Override
