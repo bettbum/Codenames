@@ -3,7 +3,7 @@ package com.example.codenames.Controller;
 import android.graphics.Color;
 
 import com.example.codenames.Model.Enum.TeamType;
-import com.example.codenames.Model.Team;
+
 import com.example.codenames.Model.Word;
 
 import java.util.ArrayList;

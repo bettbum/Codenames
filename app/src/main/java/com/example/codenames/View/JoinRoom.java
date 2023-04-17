@@ -13,8 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.codenames.Controller.DatabaseHandler;
+import com.example.codenames.Controller.DialogHandler;
 import com.example.codenames.Controller.GlobalData;
 import com.example.codenames.Controller.Validator;
+import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.R;
 
 public class JoinRoom extends AppCompatActivity {

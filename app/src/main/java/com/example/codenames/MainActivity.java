@@ -25,26 +25,5 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i = new Intent(this, MainMenu.class);
         startActivity(i);
-        //testing color
-//        MapPlayer map = new MapPlayer();
-//        ArrayList<Color> colors = map.generateColor(getBaseContext());
-//        Log.d("testing colors", colors.toString());
-
-
-        //testing if the words are on board
-//        Intent i = new Intent(this, GamePlay.class);
-//        startActivity(i);
-
-
-
-        testDatabaseConnection();
-        //Testing guessword dialog
-//        Button dialogbtn = findViewById(R.id.btnTestDialog);
-//        dialogbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DialogHandler.displayDialogGuessWord(view);
-//            }
-//        });
     }
 }

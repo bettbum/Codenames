@@ -21,10 +21,9 @@ import com.example.codenames.Controller.GlobalData;
 import com.example.codenames.Controller.Validator;
 import com.example.codenames.Model.Enum.Roles;
 import com.example.codenames.Model.Enum.TeamType;
-import com.example.codenames.Model.Game;
+
 import com.example.codenames.Model.GuessWord;
 import com.example.codenames.Model.Player;
-import com.example.codenames.Model.Team;
 import com.example.codenames.Model.Word;
 import com.example.codenames.R;
 import com.google.firebase.database.ChildEventListener;
@@ -86,6 +85,7 @@ public class GamePlay extends AppCompatActivity{
                     int result = Validator.isCorrectWord(finalI, GlobalData.game.getCurrentTurn().getTeamID());
                     listBtnsCards.get(finalI).setBackgroundColor(GlobalData.game.getListOfWord().get(finalI).getColor());
                     DatabaseHandler.updateRevealedWord(GlobalData.game.getMapID(),finalI);
+                    DatabaseHandler.updateNumberOfCardsReveaved(GlobalData.game.getMapID());
                     TeamType currentTeamType = GlobalData.game.getCurrentTurn().getTeamID();
                     switch(result){
                         //handle the cases when the user pick a card
@@ -96,8 +96,7 @@ public class GamePlay extends AppCompatActivity{
                             }else{
                                 GlobalData.game.setWinner(TeamType.RED);
                             }
-                            DatabaseHandler.updateTeamWinner(GlobalData.game.getMapID(),currentTeamType);
-                            DialogHandler.displayWinner(GamePlay.this,GlobalData.game.getWinner());
+                            DatabaseHandler.updateTeamWinner(GlobalData.game.getMapID(),GlobalData.game.getWinner());
                             break;
                         case 1:
                             //case 1: continue without losing
@@ -109,7 +108,6 @@ public class GamePlay extends AppCompatActivity{
                             if (currNumOfGuess > 0) { //update database current number of guess
                                 GlobalData.game.getCurrentGuessWord().setNumberOfGuesses(currNumOfGuess - 1);
                                 DatabaseHandler.updateNumberOfGuesses(GlobalData.game.getMapID());
-
                                 //case 2 : correct -> continue guessing
                                 //get the current numbers of guess
                                 if (currentTeamType == TeamType.RED){
@@ -125,6 +123,11 @@ public class GamePlay extends AppCompatActivity{
                         case 3:
                             //case 3: next turn
                             DialogHandler.displayDialogMessage(v.getContext(), "Wrong word");
+                            if (currentTeamType == TeamType.RED){
+                                DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.BLUE);
+                            }else{
+                                DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.RED);
+                            }
                             nextTurn();
                             break;
                     }
@@ -132,6 +135,7 @@ public class GamePlay extends AppCompatActivity{
             });
         }
         btnEndTurn = findViewById(R.id.btnEndTurn);
+        btnEndTurn.setEnabled(false);
         btnOprBlue = findViewById(R.id.btnObjBlue);
         btnSpyBlue = findViewById(R.id.btnSpyBlue);
         btnSpyRed = findViewById(R.id.btnSpyRed);
@@ -142,6 +146,8 @@ public class GamePlay extends AppCompatActivity{
         listenForWordChanged();
         listenForBluePointsChanged();
         listenForRedPointsChanged();
+        listenForTeamWinner();
+        listenForNumberOfCardsRevealed();
     }
     private void setWordsOnBoardsForSpy(){
         if(GlobalData.game.getListOfWord().size() == 25){
@@ -197,9 +203,12 @@ public class GamePlay extends AppCompatActivity{
                     setColorButtons(currentTurn);
                     if(GlobalData.game.getCurrentTurn().getPlayerID().equals(GlobalData.currentPlayer.getPlayerID())){
                         DialogHandler.displayDialogMessage(GamePlay.this,"YOUR TURN");
+                        btnEndTurn.setEnabled(true);
                         if (currentTurn.getRole() == Roles.spymaster) {
                             DialogHandler.displayDialogGuessWord(GamePlay.this, GlobalData.game.getMapID());
                         }
+                    }else{
+                        btnEndTurn.setEnabled(false);
                     }
                 }
             }
@@ -327,9 +336,9 @@ public class GamePlay extends AppCompatActivity{
                 if(snapshot.exists()){
                     int points = snapshot.getValue(Integer.class);
                     lblBluePoints.setText(String.valueOf(points));
-                    if(points == 8){
+                    if(points == 9){
                         //blue win
-                        GlobalData.game.setWinner(TeamType.BLUE);
+                        DatabaseHandler.updateTeamWinner(GlobalData.game.getMapID(),TeamType.BLUE);
                     }
                 }
             }
@@ -345,8 +354,9 @@ public class GamePlay extends AppCompatActivity{
                 if(snapshot.exists()){
                     int points = snapshot.getValue(Integer.class);
                     lblRedPoints.setText(String.valueOf(points));
-                    if(points == 9){
-                        GlobalData.game.setWinner(TeamType.RED);
+                    if(points == 8){
+                        DatabaseHandler.updateTeamWinner(GlobalData.game.getMapID(),TeamType.RED);
+
                     }
                 }
             }
@@ -363,7 +373,32 @@ public class GamePlay extends AppCompatActivity{
                     TeamType winner = snapshot.getValue(TeamType.class);
                     DialogHandler.displayWinner(GamePlay.this,winner);
                 }
-
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+    private void listenForNumberOfCardsRevealed(){
+        DatabaseHandler.gameDatabase.child(GlobalData.game.getMapID()).child("numberOfCardsRevealed").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    int numberOfCardsRevealed = snapshot.getValue(Integer.class);
+                    GlobalData.game.setNumberOfCardsRevealed(numberOfCardsRevealed);
+                    if (numberOfCardsRevealed == 25){
+                        DialogHandler.displayDialogMessage(GamePlay.this, "All the cards are revealed. Please go back to the main menu to start new game");
+                    }
+                    new CountDownTimer(2000,1000){
+                        @Override
+                        public void onTick(long l) {
+                            DialogHandler.displayWinner(GamePlay.this, TeamType.undefined);
+                        }
+                        @Override
+                        public void onFinish() {
+                        }
+                    }.start();
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

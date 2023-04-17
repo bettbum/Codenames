@@ -48,7 +48,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:background="@drawable/button_default"
-            android:enabled="false"
             android:text="@string/btn_back"
             android:textColor="#8BC34A"
             android:textSize="16sp"

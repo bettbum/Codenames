@@ -8,15 +8,22 @@ import java.util.UUID;
 
 public class Game {
     private String mapID;
-    private Boolean isStarted;
-    private Boolean isEnded;
     private int bluePoints;
     private int redPoints;
+    private int numberOfCardsRevealed;
     private TeamType winner;
     private ArrayList<Word> listOfWord;
     private Player currentTurn;
     private GuessWord currentGuessWord;
     private ArrayList<Player> currentPlayers;
+
+    public int getNumberOfCardsRevealed() {
+        return numberOfCardsRevealed;
+    }
+
+    public void setNumberOfCardsRevealed(int numberOfCardsRevealed) {
+        this.numberOfCardsRevealed = numberOfCardsRevealed;
+    }
 
     public ArrayList<Player> getCurrentPlayers() {
         return currentPlayers;
@@ -41,10 +48,6 @@ public class Game {
         this.currentTurn = currentTurn;
     }
 
-    public void setEnded(Boolean ended) {
-        isEnded = ended;
-        winner = null;
-    }
 
     public String getMapID() {
         return mapID;
@@ -53,15 +56,6 @@ public class Game {
     public void setMapID(String mapID) {
         this.mapID = mapID;
     }
-
-    public Boolean getStarted() {
-        return isStarted;
-    }
-
-    public void setStarted(Boolean started) {
-        isStarted = started;
-    }
-
 
     public TeamType getWinner() {
         return winner;
@@ -81,20 +75,21 @@ public class Game {
 
     public Game(String mapID, Boolean isStarted) {
         this.mapID = mapID;
-        this.isStarted = isStarted;
     }
     public Game(String mapID){
         this.mapID = mapID;
         this.currentPlayers = new ArrayList<Player>();
+        this.bluePoints = 0;
+        this.redPoints = 0;
+        this.numberOfCardsRevealed = 0;
     }
     public Game(){
         int randomId = (int)Math.floor(Math.random() * (9999 - 1000 + 1) + 1000);
         this.mapID = String.valueOf(randomId);
-        this.isStarted = false;
-        this.isEnded = false;
         this.bluePoints = 0;
         this.redPoints = 0;
         this.currentPlayers = new ArrayList<Player>();
+        this.numberOfCardsRevealed = 0;
     }
     public int getBluePoints() {
         return bluePoints;

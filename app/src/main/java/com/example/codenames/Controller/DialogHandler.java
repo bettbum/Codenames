@@ -2,6 +2,8 @@ package com.example.codenames.Controller;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.Editable;
@@ -13,10 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.codenames.MainActivity;
 import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.Model.GuessWord;
 import com.example.codenames.R;
 import com.example.codenames.View.GamePlay;
+import com.example.codenames.View.MainMenu;
 
 public class DialogHandler {
 
@@ -30,12 +34,24 @@ public class DialogHandler {
         TextView lblTeamWinner = dialog.findViewById(R.id.lblTeamWinner);
         if (team == TeamType.RED)
             lblTeamWinner.setText("RED TEAM");
-        else lblTeamWinner.setText("BLUE TEAM");
+        else if(team == TeamType.BLUE) {
+            lblTeamWinner.setText("BLUE TEAM");
+        }else{
+            lblTeamWinner.setText("UNDEFINED");
+        }
         Button btnBack = dialog.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dialog.dismiss();
+            }
+        });
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Intent i = new Intent(ctx, MainMenu.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                ctx.startActivity(i);
             }
         });
         dialog.show();

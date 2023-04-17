@@ -50,6 +50,7 @@ public class Room extends AppCompatActivity {
             public void onClick(View v) {
                 if(GlobalData.currentPlayer != null && GlobalData.game != null){
                     DatabaseHandler.removePlayer(GlobalData.game.getMapID(), GlobalData.currentPlayer.getPlayerID());
+                    GlobalData.game.getCurrentPlayers().remove(GlobalData.currentPlayer);
                     finish();
                 }
             }
@@ -96,6 +97,7 @@ public class Room extends AppCompatActivity {
             public void onClick(View v) {
                 if(GlobalData.game != null){
                     DatabaseHandler.addRoleForPlater(GlobalData.game.getMapID(), GlobalData.currentPlayer.getPlayerID(), team, role);
+                    btnReady.setEnabled(false);
                 }
             }
         });
@@ -150,7 +152,7 @@ public class Room extends AppCompatActivity {
                 }
                 if(GlobalData.game.getCurrentPlayers().size() >= 4){
                     boolean isEnoughPlayers = true;
-                    for (Player pl : GlobalData.listOfCurrentPlayers){
+                    for (Player pl : GlobalData.game.getCurrentPlayers()){
                         if(pl.getTeamID() == null || pl.getRole() == null){
                             isEnoughPlayers = false;
                             Log.d("not enough players" , "not enough players");

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class GlobalData {
     public static Game game;
     public static Player currentPlayer;
-    public static ArrayList<Player> listOfCurrentPlayers  = new ArrayList<Player>();
     public static ArrayList<Word> listOfWords;
 
 }

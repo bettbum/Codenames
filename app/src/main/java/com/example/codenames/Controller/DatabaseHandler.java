@@ -2,26 +2,18 @@ package com.example.codenames.Controller;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.CountDownTimer;
-import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.example.codenames.Model.Enum.Roles;
 import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.Model.Game;
 import com.example.codenames.Model.GuessWord;
-import com.example.codenames.Model.MapPlayer;
 import com.example.codenames.Model.Player;
-import com.example.codenames.Model.Team;
 import com.example.codenames.Model.Word;
-import com.example.codenames.R;
 import com.example.codenames.View.Room;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class DatabaseHandler {
     private static FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -165,5 +156,9 @@ public class DatabaseHandler {
     }
     public static void updateNumberOfGuesses(String gameId){
         gameDatabase.child(gameId).child("currentGuessWord").child("numberOfGuesses").setValue(GlobalData.game.getCurrentGuessWord().getNumberOfGuesses());
+    }
+    public static void updateNumberOfCardsReveaved(String gameId){
+        int numberOfCardsRevealed = GlobalData.game.getNumberOfCardsRevealed() + 1;
+        gameDatabase.child(gameId).child("numberOfCardsRevealed").setValue(numberOfCardsRevealed);
     }
 }

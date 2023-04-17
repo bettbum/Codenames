@@ -1,5 +1,6 @@
 package com.example.codenames.View;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -9,7 +10,9 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.codenames.Controller.DatabaseHandler;
+import com.example.codenames.Controller.DialogHandler;
 import com.example.codenames.Controller.GlobalData;
+import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.R;
 
 import java.io.IOException;
