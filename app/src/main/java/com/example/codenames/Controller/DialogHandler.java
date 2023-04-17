@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.codenames.Model.Enum.TeamType;
 import com.example.codenames.Model.GuessWord;
 import com.example.codenames.R;
+import com.example.codenames.View.GamePlay;
 
 public class DialogHandler {
 
@@ -34,7 +35,7 @@ public class DialogHandler {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //add
+
             }
         });
         dialog.show();
@@ -56,7 +57,6 @@ public class DialogHandler {
             @Override
             public void onFinish() {
                 dialog.dismiss();
-                Log.d("dd","Finished Dialog");
             }
         }.start();
     }

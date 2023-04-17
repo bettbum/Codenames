@@ -108,18 +108,16 @@ public class GamePlay extends AppCompatActivity{
                             //get the current numbers of guess
                             int currNumOfGuess = GlobalData.game.getCurrentGuessWord().getNumberOfGuesses();
                             if (currentTeamType == TeamType.RED){
-                                int currRedPoint = GlobalData.game.getRedPoints();
-                                GlobalData.game.setRedPoints(currRedPoint + 1);
                                 DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.RED);
                             }else{
-                                int currBluePoint = GlobalData.game.getBluePoints();
-                                GlobalData.game.setBluePoints(currBluePoint + 1);
                                 DatabaseHandler.updatePoints(GlobalData.game.getMapID(), TeamType.BLUE);
                             }
                             //reduce the number of time to guess
                             if (currNumOfGuess > 0) {
                                 GlobalData.game.getCurrentGuessWord().setNumberOfGuesses(currNumOfGuess - 1);
-                                lblClueNumber.setText(GlobalData.game.getCurrentGuessWord().getNumberOfGuesses());
+                                lblClueNumber.setText(String.valueOf(GlobalData.game.getCurrentGuessWord().getNumberOfGuesses()));
+                            }else if (currNumOfGuess == 0 ){
+                                nextTurn();
                             }
                             else nextTurn();
                             break;
