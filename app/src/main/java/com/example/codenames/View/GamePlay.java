@@ -204,11 +204,17 @@ public class GamePlay extends AppCompatActivity{
                     if(GlobalData.game.getCurrentTurn().getPlayerID().equals(GlobalData.currentPlayer.getPlayerID())){
                         DialogHandler.displayDialogMessage(GamePlay.this,"YOUR TURN");
                         btnEndTurn.setEnabled(true);
+                        for (Button btn : listBtnsCards){
+                            btn.setEnabled(true);
+                        }
                         if (currentTurn.getRole() == Roles.spymaster) {
                             DialogHandler.displayDialogGuessWord(GamePlay.this, GlobalData.game.getMapID());
                         }
                     }else{
                         btnEndTurn.setEnabled(false);
+                        for (Button btn : listBtnsCards){
+                            btn.setEnabled(false);
+                        }
                     }
                 }
             }
@@ -309,7 +315,7 @@ public class GamePlay extends AppCompatActivity{
                         int color = snapshot.child("color").getValue(Integer.class);
                         int id = Integer.valueOf(snapshot.getKey());
                         if(isRevealed){
-                            if(GlobalData.game.getCurrentTurn().getRole() == Roles.spymaster){
+                            if(GlobalData.currentPlayer.getRole() == Roles.spymaster){
                                 listBtnsCards.get(id).setText("");
                             }else{
                                 listBtnsCards.get(id).setBackgroundColor(color);
